@@ -1,0 +1,22 @@
+---
+interface DoubleLineProps {
+  borderWidth?: string;
+  spaceBetween?: string;
+}
+
+const { borderWidth = "1px", spaceBetween = "2px" } = Astro.props;
+
+const styles = `
+    border-top-width: ${borderWidth};
+    border-bottom-width: ${borderWidth};
+    height: ${spaceBetween};
+`;
+---
+
+<div class="mb-10">
+  <div class:list={["border-carbon-700 w-full"]} style={styles}></div>
+
+  <slot />
+
+  <div class:list={["border-carbon-700 w-full"]} style={styles}></div>
+</div>

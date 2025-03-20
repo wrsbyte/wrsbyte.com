@@ -1,0 +1,22 @@
+---
+import Brand from "@/components/shared/Brand.astro";
+import Container from "@/components/shared/Container.astro";
+import NavBar from "@/components/shared/NavBar.astro";
+import SocialNetworks from "./SocialNetworks.astro";
+---
+
+<header class="py-4 border-b-2 border-ivory-500 bg-ivory-100">
+  <Container>
+    <section class="grid grid-cols-3 gap-4 items-center justify-between">
+      <div class="justify-self-start">
+        <Brand />
+      </div>
+      <div class="justify-self-center w-auto">
+        <NavBar />
+      </div>
+      <div class="justify-self-end">
+        <SocialNetworks />
+      </div>
+    </section>
+  </Container>
+</header>

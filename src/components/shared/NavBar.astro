@@ -1,0 +1,40 @@
+---
+import Link from "./Link.astro";
+
+interface Props {
+  position?: "start" | "center" | "end";
+}
+
+const { position = "start" } = Astro.props;
+
+const menuItems = [
+  {
+    name: "Inicio",
+    link: "/",
+  },
+  {
+    name: "Experiencia",
+    link: "/#experience",
+  },
+  {
+    name: "Blog",
+    link: "/blog",
+  },
+  {
+    name: "Contacto",
+    link: "/#contact",
+  }
+];
+---
+
+<nav class="flex space-x-8">
+  {
+    menuItems.map((item, index) => {
+      return (
+        <Link href={item.link}>
+          {item.name}
+        </Link>
+      )
+    })
+  }
+</nav>

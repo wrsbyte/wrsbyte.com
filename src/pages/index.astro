@@ -1,19 +1,23 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Container from "../components/Container.astro";
+import GameOfLife from "@/components/sections/GameOfLife.astro";
+import HomeStatus from "@/components/sections/HomeStatus.astro";
+import Presentation from "@/components/sections/Presentation.astro";
+import Header from "@/components/shared/Header.astro";
+import RootLayout from "@/layouts/RootLayout.astro";
+
+const title = "Welcome to Astro.";
+const description = "Wilmer";
 ---
 
-<Layout title="Welcome to Astro." description="Wilmer">
+<RootLayout title={title} description={description}>
   <Header />
   <main>
-    <Container>
-      <h1>Welcome to Astro</h1>
-      <p>
-        This is a simple Astro starter template. It includes a layout, a header
-        component, and a container component. It also includes a global CSS file
-        and a 404 page.
-      </p>
-    </Container>
+    <GameOfLife />
+    <HomeStatus />
+    <Presentation />
+    <!-- <Trajectory /> -->
+    <!-- <Projects /> -->
+    <!-- <Art /> -->
   </main>
-</Layout>
+  <!-- <Footer /> -->
+</RootLayout>

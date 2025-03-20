@@ -1,0 +1,44 @@
+---
+import Container from "@/components/shared/Container.astro";
+import DoubleLine from "../shared/DoubleLine.astro";
+import Link from "../shared/Link.astro";
+
+const navigationItems = [
+  {
+    name: "Presentación",
+    link: "#presentation",
+  },
+  {
+    name: "Trayectoria",
+    link: "#trajectory",
+  },
+  {
+    name: "Contacto",
+    link: "#contact",
+  },
+];
+---
+
+<Container tag="section">
+  <DoubleLine spaceBetween="10px" borderWidth="2px">
+    <nav
+      class="grid grid-cols-[5rem_1fr_5rem] gap-4 items-center justify-between py-5"
+    >
+      <p
+        class="font-georgia font-medium text-ivory-700 text-sm justify-self-start"
+      >
+        VOL NO. 01
+      </p>
+
+      <div
+        class="flex space-x-8 justify-self-center items-center justify-center columns-auto w-full"
+      >
+        {
+          navigationItems.map((item, index) => {
+            return <Link href={item.link}>{item.name}</Link>;
+          })
+        }
+      </div>
+    </nav>
+  </DoubleLine>
+</Container>

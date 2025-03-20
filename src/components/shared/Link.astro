@@ -1,0 +1,21 @@
+---
+interface Props {
+  href: string | URL | null | undefined;
+  uppercase?: boolean;
+}
+
+const { href, uppercase = true } = Astro.props;
+---
+
+<a
+  class:list={[
+    "font-mono text-sm text-carbon-700 dark:text-ivory-100 transition-colors",
+    "relative inline-block after:absolute after:bottom-0 after:left-0 after:h-[2px]",
+    "after:w-0 after:bg-ivory-700 dark:after:bg-ivory-500 after:transition-all",
+    "hover:after:w-full",
+    uppercase && "uppercase",
+  ]}
+  href={href}
+>
+  <slot />
+</a>
