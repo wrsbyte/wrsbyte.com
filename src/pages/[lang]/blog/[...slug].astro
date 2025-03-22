@@ -1,0 +1,42 @@
+---
+import PostDetail from "@/components/sections/PostDetail.astro";
+import Header from "@/components/shared/Header.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import RootLayout from "@/layouts/RootLayout.astro";
+import { getCollection } from "astro:content";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  const paths = posts.map((page) => {
+    const [lang, ...slug] = page.slug.split("/");
+    return { params: { lang, slug: slug.join("/") || undefined }, props: page };
+  });
+
+  return paths;
+}
+
+const page = Astro.props;
+const formattedDate = page.data.date.toLocaleString(lang);
+
+const { Content } = await page.render();
+
+const title = page.data.title;
+const description = "blog";
+---
+
+<RootLayout title={title} description={description}>
+  <Header />
+  <main>
+    <PostDetail title={page.data.title} date={page.data.date}>
+      <div
+        class="prose dark:prose-invert w-full max-w-[75ch] mx-auto prose-headings:text-carbon-900 prose-headings:dark:text-white prose-p:text-carbon-700 prose-p:dark:text-ivory-100 prose-p:text-lg prose-li:text-lg"
+      >
+        <Content />
+      </div>
+    </PostDetail>
+  </main>
+</RootLayout>
