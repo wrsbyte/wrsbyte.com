@@ -1,0 +1,42 @@
+---
+import Calendar from "@/components/icons/Calendar.astro";
+import ArrowLink from "@/components/shared/ArrowLink.astro";
+import Container from "@/components/shared/Container.astro";
+import PageTitle from "@/components/shared/PageTitle.astro";
+import { formatDate, getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+interface Props {
+  title: string;
+  date: Date;
+}
+
+const { title, date } = Astro.props;
+
+const backBlogPath = getRelativeLocaleUrl(lang, "/blog");
+---
+
+<Container className="overflow-hidden py-12 ">
+  <div class=" mb-8">
+    <ArrowLink href={backBlogPath} direction="left" className="mb-6">
+      <span class="truncate block">{t("blog.post.detail.back")}</span>
+    </ArrowLink>
+
+    <div class="max-w-[75ch] mx-auto border-b border-ivory-500">
+      <PageTitle title={title} className="!mb-2 " />
+      <div
+        class="font-mono py-2 text-left flex items-center whitespace-nowrap mb-6"
+      >
+        <Calendar
+          className="h-4 w-4 mr-1 flex-shrink-0 stroke-carbon-900 dark:stroke-white"
+        />
+        <span>{formatDate(date, lang)}</span>
+      </div>
+    </div>
+  </div>
+
+  <slot />
+</Container>

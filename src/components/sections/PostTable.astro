@@ -1,0 +1,62 @@
+---
+import Calendar from "@/components/icons/Calendar.astro";
+import ArrowLink from "@/components/shared/ArrowLink.astro";
+import Container from "@/components/shared/Container.astro";
+import PageTitle from "@/components/shared/PageTitle.astro";
+import { formatDate, getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const posts = await getCollection("blog");
+const localizedPosts = posts.filter((post) => post.slug.startsWith(`${lang}/`)).map((post) => ({
+  ...post,
+  slug: post.slug.replace(`${lang}/`, ""),
+}));
+---
+
+<Container className="overflow-hidden py-12">
+  <PageTitle title={t("blog.title")} />
+
+  <div class="relative overflow-x-auto">
+    <table class="w-full border-collapse">
+      <thead>
+        <tr>
+          <th
+            class="font-medium text-carbon-700 dark:text-ivory-100 py-2 border-b border-ivory-500 text-left w-1/6"
+          >
+            {t("blog.table.date")}
+          </th>
+          <th
+            class="font-medium text-carbon-700 dark:text-ivory-100 py-2 border-b border-ivory-500 text-left w-4/6"
+          >
+            {t("blog.table.title")}
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {
+          localizedPosts.map((post) => (
+            <tr class="border-b border-ivory-500">
+              <td class="font-mono py-2 text-left flex items-center whitespace-nowrap">
+                <Calendar className="h-4 w-4 mr-1 flex-shrink-0 stroke-carbon-900 dark:stroke-white" />
+                <span>{formatDate(post.data.date, lang)}</span>
+              </td>
+              <td class="font-mono py-2 text-left max-w-0 whitespace-nowrap">
+                <ArrowLink
+                  showArrow={true}
+                  href={getRelativeLocaleUrl(lang, `/blog/${post.slug}`)}
+                >
+                  <span class="truncate block">{post.data.title}</span>
+                </ArrowLink>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</Container>
