@@ -36,7 +36,7 @@ const getTranslatePath = (language: "en" | "es") => {
     variant="ghost"
     size="icon"
     aria-label="Change language"
-    className="w-15"
+    className="w-15 h-full"
   >
     <div class="flex items-center gap-1 px-2">
       <Globe className="h-5 w-5 stroke-ivory-700 dark:stroke-ivory-100" />
@@ -58,7 +58,7 @@ const getTranslatePath = (language: "en" | "es") => {
           <li>
             <a
               href={getTranslatePath(language)}
-              class="block px-4 py-2 hover:bg-ivory-500/20 dark:hover:bg-carbon-700 dark:hover:text-ivory-100"
+              class="block px-4 py-2 hover:bg-ivory-500/30 dark:hover:bg-carbon-700 dark:hover:text-ivory-100"
             >
               {t(`nav.lang.${language}` as any)}
             </a>
