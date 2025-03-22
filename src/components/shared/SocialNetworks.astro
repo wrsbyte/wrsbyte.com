@@ -1,6 +1,10 @@
 ---
 import Github from "@/components/icons/Github.astro";
 import LinkedIn from "@/components/icons/LinkedIn.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <div class="flex items-center justify-center gap-4">
@@ -9,7 +13,7 @@ import LinkedIn from "@/components/icons/LinkedIn.astro";
     target="_blank"
     rel="noopener noreferrer"
     class="stroke-ivory-700 dark:stroke-ivory-100 hover:scale-105 transition-all"
-    title="Ir al perfil de Github"
+    title={t("nav.social.github")}
   >
     <Github />
   </a>
@@ -18,7 +22,7 @@ import LinkedIn from "@/components/icons/LinkedIn.astro";
     target="_blank"
     rel="noopener noreferrer"
     class="stroke-ivory-700 dark:stroke-ivory-100 hover:scale-105 transition-all"
-    title="Ir al perfil de Github"
+    title={t("nav.social.linkedin")}
   >
     <LinkedIn />
   </a>
