@@ -1,9 +1,54 @@
 ---
-import Container from "@/components/shared/Container.astro"
+import Link from "@/components/shared/Link.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const menuItems = [
+  {
+    name: t("nav.home"),
+    link: getRelativeLocaleUrl(lang, "/"),
+  },
+  {
+    name: t("nav.experience"),
+    link: getRelativeLocaleUrl(lang, "/#experience"),
+  },
+  {
+    name: t("nav.blog"),
+    link: getRelativeLocaleUrl(lang, "/blog"),
+  },
+  {
+    name: t("nav.sitemap"),
+    link: getRelativeLocaleUrl(lang, "/sitemap"),
+  },
+  {
+    name: t("nav.contact"),
+    link: getRelativeLocaleUrl(lang, "/#contact"),
+  },
+];
+
+const year = new Date().getFullYear().toString();
 ---
 
-<footer>
-    <Container>
-        footer
-    </Container>
+<footer
+  class="border-t border-ivory-500 py-8 mt-12 bg-ivory-100 dark:bg-carbon-700"
+>
+  <div class="container mx-auto px-4 md:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0">
+        <p class="text-sm text-carbon-700 dark:text-ivory-200 font-mono">
+            © {year} {t("footer.copyright")}
+        </p>
+      </div>
+      <nav class="flex space-x-6">
+        {
+          menuItems.map((item, index) => {
+            return <Link href={item.link}>{item.name}</Link>;
+          })
+        }
+      </nav>
+    </div>
+  </div>
 </footer>

@@ -2,8 +2,10 @@
 import GameOfLife from "@/components/sections/GameOfLife.astro";
 import HomeStatus from "@/components/sections/HomeStatus.astro";
 import Presentation from "@/components/sections/Presentation.astro";
+import Footer from "@/components/shared/Footer.astro";
 import Header from "@/components/shared/Header.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
+
 import { getLangFromUrl, getLanguages, useTranslations } from "@/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -20,7 +22,7 @@ const description = "Wilmer";
 
 <RootLayout title={title} description={description}>
   <Header />
-  <main>
+  <main class="flex-1">
     <GameOfLife />
     <HomeStatus />
     <Presentation />
@@ -28,5 +30,5 @@ const description = "Wilmer";
     <!-- <Projects /> -->
     <!-- <Art /> -->
   </main>
-  <!-- <Footer /> -->
+  <Footer />
 </RootLayout>

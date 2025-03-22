@@ -1,8 +1,10 @@
 ---
 import PostDetail from "@/components/sections/PostDetail.astro";
+import Footer from "@/components/shared/Footer.astro";
 import Header from "@/components/shared/Header.astro";
-import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import RootLayout from "@/layouts/RootLayout.astro";
+
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import { getCollection } from "astro:content";
 
 const lang = getLangFromUrl(Astro.url);
@@ -30,7 +32,7 @@ const description = "blog";
 
 <RootLayout title={title} description={description}>
   <Header />
-  <main>
+  <main class="flex-1">
     <PostDetail title={page.data.title} date={page.data.date}>
       <div
         class="prose dark:prose-invert w-full max-w-[75ch] mx-auto prose-headings:text-carbon-900 prose-headings:dark:text-ivory-100 prose-p:text-carbon-700 prose-p:dark:text-ivory-100 prose-p:text-lg prose-li:text-lg"
@@ -39,4 +41,5 @@ const description = "blog";
       </div>
     </PostDetail>
   </main>
+  <Footer />
 </RootLayout>
