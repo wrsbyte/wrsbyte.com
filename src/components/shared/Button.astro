@@ -42,7 +42,7 @@ const spanBgClasses = {
   primary: "bg-carbon-900 dark:bg-ivory-500",
   secondary: "bg-ivory-700 dark:bg-carbon-900",
   outline: "bg-ivory-200 dark:bg-carbon-800",
-  ghost: "bg-ivory-500 dark:bg-ivory-700",
+  ghost: "bg-ivory-500/30 dark:bg-ivory-700",
   accent: "bg-ivory-800 dark:bg-ivory-700",
 };
 
@@ -62,8 +62,8 @@ console.log("variant", [
     sizeClasses[size],
     className,
   ]}
->
-  <span class="relative z-[1] flex items-center justify-center">
+  >
+    <span class="relative z-[1] flex items-center justify-center">
     <slot />
   </span>
   <span
