@@ -42,7 +42,7 @@ const localizedPosts = posts.filter((post) => post.slug.startsWith(`${lang}/`)).
           localizedPosts.map((post) => (
             <tr class="border-b border-ivory-500">
               <td class="font-mono py-2 text-left flex items-center whitespace-nowrap">
-                <Calendar className="h-4 w-4 mr-1 flex-shrink-0 stroke-carbon-900 dark:stroke-white" />
+                <Calendar className="h-4 w-4 mr-1 flex-shrink-0 stroke-carbon-900 dark:stroke-ivory-100" />
                 <span>{formatDate(post.data.date, lang)}</span>
               </td>
               <td class="font-mono py-2 text-left max-w-0 whitespace-nowrap">

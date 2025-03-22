@@ -39,8 +39,8 @@ const getTranslatePath = (language: "en" | "es") => {
     className="w-15"
   >
     <div class="flex items-center gap-1 px-2">
-      <Globe className="h-5 w-5 stroke-ivory-700 dark:stroke-white" />
-      <span class="ml-1">ES</span>
+      <Globe className="h-5 w-5 stroke-ivory-700 dark:stroke-ivory-100" />
+      <span>ES</span>
     </div>
   </Button>
 
@@ -50,7 +50,7 @@ const getTranslatePath = (language: "en" | "es") => {
     class="absolute right-0 top-0 mt-9 z-10 hidden bg-ivory-200 divide-y divide-gray-100 rounded-lg border border-ivory-500 dark:border-ivory-100 w-44 dark:bg-carbon-900"
   >
     <ul
-      class="py-2 text-sm text-carbon-700 dark:text-white"
+      class="py-2 text-sm text-carbon-700 dark:text-ivory-100"
       aria-labelledby="localSwitcher"
     >
       {
@@ -58,7 +58,7 @@ const getTranslatePath = (language: "en" | "es") => {
           <li>
             <a
               href={getTranslatePath(language)}
-              class="block px-4 py-2 hover:bg-ivory-500/20 dark:hover:bg-carbon-700 dark:hover:text-white"
+              class="block px-4 py-2 hover:bg-ivory-500/20 dark:hover:bg-carbon-700 dark:hover:text-ivory-100"
             >
               {t(`nav.lang.${language}` as any)}
             </a>
