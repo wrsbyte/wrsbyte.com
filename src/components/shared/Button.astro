@@ -1,0 +1,75 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<"button"> {
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "accent";
+  size?: "default" | "sm" | "lg" | "icon";
+  className?: string;
+  children?: any;
+}
+
+const {
+  variant = "primary",
+  size = "default",
+  className,
+  children,
+  ...props
+} = Astro.props;
+
+const baseClasses =
+  "inline-flex items-center justify-center whitespace-nowrap rounded-sm font-mono text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ivory-700 disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden group";
+
+const variantClasses = {
+  primary:
+    "bg-carbon-700 text-ivory-100 hover:bg-carbon-900 dark:bg-ivory-700 dark:text-carbon-900 dark:hover:bg-ivory-500",
+  secondary:
+    "bg-ivory-200 text-carbon-700 hover:bg-ivory-700 hover:text-ivory-100 dark:bg-carbon-800 dark:text-ivory-100 dark:hover:bg-carbon-900",
+  outline:
+    "border border-ivory-500 bg-transparent hover:bg-ivory-200 text-carbon-700 dark:text-ivory-100 dark:hover:bg-carbon-800",
+  ghost:
+    "text-carbon-700 dark:text-ivory-100",
+  accent:
+    "bg-ivory-700 text-ivory-100 hover:bg-ivory-800 dark:bg-ivory-600 dark:hover:bg-ivory-700",
+};
+
+const sizeClasses = {
+  default: "px-4 py-2",
+  sm: "h-8 px-3 py-1 text-xs",
+  lg: "h-10 px-6 py-3",
+  icon: "h-9 w-9 p-0",
+};
+
+const spanBgClasses = {
+  primary: "bg-carbon-900 dark:bg-ivory-500",
+  secondary: "bg-ivory-700 dark:bg-carbon-900",
+  outline: "bg-ivory-200 dark:bg-carbon-800",
+  ghost: "bg-ivory-500/20 dark:bg-ivory-700",
+  accent: "bg-ivory-800 dark:bg-ivory-700",
+};
+
+console.log("variant", [
+    baseClasses,
+    variantClasses[variant],
+    sizeClasses[size],
+    className,
+  ]);
+---
+
+<button
+  {...props}
+  class:list={[
+    baseClasses,
+    variantClasses[variant],
+    sizeClasses[size],
+    className,
+  ]}
+>
+  <span class="relative z-10 flex items-center justify-center">
+    <slot />
+  </span>
+  <span
+    class:list={[
+      "absolute inset-0 transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100",
+      spanBgClasses[variant],
+    ]}></span>
+</button>

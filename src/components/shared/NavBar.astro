@@ -1,40 +1,36 @@
 ---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
 import Link from "./Link.astro";
 
-interface Props {
-  position?: "start" | "center" | "end";
-}
-
-const { position = "start" } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const menuItems = [
   {
-    name: "Inicio",
-    link: "/",
+    name: t("nav.home"),
+    link: getRelativeLocaleUrl(lang, "/"),
   },
   {
-    name: "Experiencia",
-    link: "/#experience",
+    name: t("nav.experience"),
+    link: getRelativeLocaleUrl(lang, "/#experience"),
   },
   {
-    name: "Blog",
-    link: "/blog",
+    name: t("nav.blog"),
+    link: getRelativeLocaleUrl(lang, "/blog"),
   },
   {
-    name: "Contacto",
-    link: "/#contact",
-  }
+    name: t("nav.contact"),
+    link: getRelativeLocaleUrl(lang, "/#contact"),
+  },
 ];
 ---
 
 <nav class="flex space-x-8">
   {
     menuItems.map((item, index) => {
-      return (
-        <Link href={item.link}>
-          {item.name}
-        </Link>
-      )
+      return <Link href={item.link}>{item.name}</Link>;
     })
   }
 </nav>

@@ -1,0 +1,33 @@
+---
+import ArrowLeft from "@/components/icons/ArrowLeft.astro";
+import ArrowRight from "@/components/icons/ArrowRight.astro";
+
+interface Props {
+  href: string;
+  className?: string;
+  direction?: "left" | "right";
+  showArrow?: boolean;
+}
+
+const { href, className, direction = "right", showArrow = true } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "text-ivory-700 stroke-ivory-700 dark:text-ivory-500 dark:stroke-ivory-500 font-mono inline-flex items-center hover:underline transition-all group",
+    className,
+  ]}
+>
+  {
+    direction === "left" && showArrow && (
+      <ArrowLeft className="h-4 w-4 mr-1 flex-shrink-0 transition-transform group-hover:-translate-x-0.5" />
+    )
+  }
+  <slot />
+  {
+    direction === "right" && showArrow && (
+      <ArrowRight className="h-4 w-4 ml-1 flex-shrink-0 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-0.5" />
+    )
+  }
+</a>

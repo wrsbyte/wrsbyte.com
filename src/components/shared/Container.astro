@@ -3,8 +3,9 @@ interface Props {
   tag?: "div" | "section";
   ariaLabel?: string;
   ariaLabelledby?: string;
+  className?: string;
 }
-const { tag = "div", ariaLabel, ariaLabelledby } = Astro.props;
+const { tag = "div", ariaLabel, ariaLabelledby, className } = Astro.props;
 
 const Tag = tag;
 ---
@@ -12,7 +13,10 @@ const Tag = tag;
 <Tag
   aria-label={ariaLabel}
   aria-labelledby={ariaLabelledby}
-  class="w-full md:max-w-[750px] lg:max-w-[950px] mx-auto px-2"
+  class:list={[
+    "w-full md:max-w-[750px] lg:max-w-[950px] mx-auto px-3",
+    className,
+  ]}
 >
   <slot />
 </Tag>

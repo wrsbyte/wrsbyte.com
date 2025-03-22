@@ -2,10 +2,12 @@
 import Brand from "@/components/shared/Brand.astro";
 import Container from "@/components/shared/Container.astro";
 import NavBar from "@/components/shared/NavBar.astro";
-import SocialNetworks from "./SocialNetworks.astro";
+import SocialNetworks from "@/components/shared/SocialNetworks.astro";
+import ThemeSwitcher from "@/components/shared/ThemeSwitcher.astro";
+import LocaleSwitcher from "@/components/shared/LocaleSwitcher.astro";
 ---
 
-<header class="py-4 border-b-2 border-ivory-500 bg-ivory-100">
+<header class="py-4 border-b-2 border-ivory-500 bg-background">
   <Container>
     <section class="grid grid-cols-3 gap-4 items-center justify-between">
       <div class="justify-self-start">
@@ -14,7 +16,9 @@ import SocialNetworks from "./SocialNetworks.astro";
       <div class="justify-self-center w-auto">
         <NavBar />
       </div>
-      <div class="justify-self-end">
+      <div class="flex gap-4 justify-self-end">
+        <LocaleSwitcher />
+        <ThemeSwitcher />
         <SocialNetworks />
       </div>
     </section>

@@ -1,15 +1,25 @@
 ---
-import Github from "../icons/Github.astro";
+import Github from "@/components/icons/Github.astro";
+import LinkedIn from "@/components/icons/LinkedIn.astro";
 ---
 
-<div class="flex items-center justify-center space-x-4">
+<div class="flex items-center justify-center gap-4">
   <a
     href="https://github.com/WilmerRS"
     target="_blank"
     rel="noopener noreferrer"
-    class=" stroke-ivory-700 hover:scale-105 transition-all"
+    class="stroke-ivory-700 dark:stroke-white hover:scale-105 transition-all"
     title="Ir al perfil de Github"
   >
     <Github />
+  </a>
+  <a
+    href="https://www.linkedin.com/in/wilmerrs/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="stroke-ivory-700 dark:stroke-white hover:scale-105 transition-all"
+    title="Ir al perfil de Github"
+  >
+    <LinkedIn />
   </a>
 </div>

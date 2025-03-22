@@ -1,0 +1,12 @@
+---
+interface Props {
+  title: string;
+  className?: string;
+}
+
+const { title, className } = Astro.props;
+---
+
+<h1 class:list={["text-4xl font-grenze font-bold mb-8", className]}>
+  {title}
+</h1>
