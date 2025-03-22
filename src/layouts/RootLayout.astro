@@ -1,28 +1,38 @@
 ---
+import SEO from "@/components/shared/SEO.astro";
+import { getLangFromUrl } from "@/i18n/utils";
+import type { Preload } from "@/types/Preload";
 import "@fontsource-variable/jetbrains-mono";
 import "@fontsource/grenze";
-
 import "@/styles/global.css";
+
+const lang = getLangFromUrl(Astro.url);
 
 interface Props {
   title: string;
   description: string;
+  preload?: Array<Preload>;
+  canonical?: string;
+  image?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, preload, canonical, image } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <SEO
+      canonical={canonical}
+      description={description}
+      image={image}
+      preload={preload}
+      title={title}
+    />
   </head>
-  <body class="antialiased bg-ivory-200 text-carbon-700 selection:bg-ivory-500">
+  <body
+    class="antialiased bg-ivory-200 dark:bg-carbon-900 text-carbon-700 dark:text-white selection:bg-ivory-700 dark:selection:bg-carbon-700"
+  >
     <slot />
   </body>
 </html>
