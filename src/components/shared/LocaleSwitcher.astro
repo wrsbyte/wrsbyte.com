@@ -1,0 +1,84 @@
+---
+import Globe from "@/components/icons/Globe.astro";
+import Button from "@/components/shared/Button.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getCollection } from "astro:content";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const languages: ("es" | "en")[] = ["es", "en"];
+const posts = await getCollection("blog");
+
+const getTranslatePath = (language: "en" | "es") => {
+  const url = new URL(Astro.url);
+  const isDetailPost = url.pathname.match(/\/blog\/[\w-]+/);
+
+  if (isDetailPost) {
+    const post = posts.find((post) => !!post.data.translations[language]);
+    const slug = post?.data.translations[language]?.split("/").pop();
+    
+    if (!slug) {
+      return `/${language}/blog/`;
+    }
+
+    return `/${language}/blog/${slug}`;
+  }
+
+  url.pathname = url.pathname.replace(`/${lang}/`, `/${language}/`);
+  return url.pathname;
+};
+---
+
+<div class="relative flex items-center gap-1">
+  <Button
+    id="localSwitcher"
+    data-dropdown-toggle="dropdown"
+    variant="ghost"
+    size="icon"
+    aria-label="Change language"
+    className="w-15"
+  >
+    <div class="flex items-center gap-1 px-2">
+      <Globe className="h-5 w-5 stroke-ivory-700 dark:stroke-white" />
+      <span class="ml-1">ES</span>
+    </div>
+  </Button>
+
+  <!-- Dropdown menu -->
+  <div
+    id="localDropdownOptions"
+    class="absolute right-0 top-0 mt-9 z-10 hidden bg-ivory-200 divide-y divide-gray-100 rounded-lg border border-ivory-500 dark:border-ivory-100 w-44 dark:bg-carbon-900"
+  >
+    <ul
+      class="py-2 text-sm text-carbon-700 dark:text-white"
+      aria-labelledby="localSwitcher"
+    >
+      {
+        languages.map((language) => (
+          <li>
+            <a
+              href={getTranslatePath(language)}
+              class="block px-4 py-2 hover:bg-ivory-500/20 dark:hover:bg-carbon-700 dark:hover:text-white"
+            >
+              {t(`nav.lang.${language}` as any)}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<script is:inline>
+  const button = document.getElementById("localSwitcher");
+  const dropdown = document.getElementById("localDropdownOptions");
+  button.addEventListener("click", () => {
+    dropdown.classList.toggle("hidden");
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+      dropdown.classList.add("hidden");
+    }
+  });
+</script>
