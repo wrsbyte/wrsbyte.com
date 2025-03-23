@@ -27,9 +27,14 @@ const getTranslatePath = (language: "en" | "es") => {
   url.pathname = url.pathname.replace(`/${lang}/`, `/${language}/`);
   return url.pathname;
 };
+
+const langs = {
+  es: "ES",
+  en: "EN",
+};
 ---
 
-<div class="relative flex items-center gap-1">
+<div  {...Astro.props} class="relative flex items-center gap-1">
   <Button
     id="localSwitcher"
     data-dropdown-toggle="dropdown"
@@ -40,7 +45,7 @@ const getTranslatePath = (language: "en" | "es") => {
   >
     <div class="flex items-center gap-1 px-2">
       <Globe className="h-5 w-5 stroke-ivory-700 dark:stroke-ivory-100" />
-      <span>ES</span>
+      <span id="locale-name">{langs[lang]}</span>
     </div>
   </Button>
 
