@@ -38,14 +38,18 @@ const year = new Date().getFullYear().toString();
   class="border-t-2 border-ivory-500 py-8 mt-12 bg-ivory-200 dark:bg-carbon-900"
 >
   <Container>
-    <div class="flex flex-col lg:flex-row justify-between items-center">
-      <div class="mb-4 lg:mb-0">
-        <p class="text-sm text-carbon-700 dark:text-ivory-200 font-mono text-center lg:text-left">
+    <div class="flex flex-wrap justify-between items-center">
+      <div class="mb-4 w-full">
+        <p
+          class="text-sm text-carbon-700 dark:text-ivory-200 font-mono text-center md:text-left"
+        >
           © {year}
           {t("footer.copyright")}
         </p>
       </div>
-      <nav class="flex space-x-6 flex-wrap justify-center lg:flex-nowrap">
+      <nav
+        class="flex space-x-6 flex-wrap justify-center md:justify-start lg:flex-nowrap w-full"
+      >
         {
           menuItems.map((item, index) => {
             return <Link href={item.link}>{item.name}</Link>;
