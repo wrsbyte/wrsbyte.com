@@ -1,26 +1,84 @@
 ---
+import Burger from "@/components/icons/Burger.astro";
+import CloseX from "@/components/icons/CloseX.astro";
 import Brand from "@/components/shared/Brand.astro";
+import Button from "@/components/shared/Button.astro";
 import Container from "@/components/shared/Container.astro";
+import LocaleSwitcher from "@/components/shared/LocaleSwitcher.astro";
 import NavBar from "@/components/shared/NavBar.astro";
 import SocialNetworks from "@/components/shared/SocialNetworks.astro";
 import ThemeSwitcher from "@/components/shared/ThemeSwitcher.astro";
-import LocaleSwitcher from "@/components/shared/LocaleSwitcher.astro";
 ---
 
-<header class="py-4 border-b-2 border-ivory-500 bg-background">
+<header
+  class="sticky top-0 z-50 bg-ivory-200 dark:bg-carbon-900 py-4 border-b-2 border-ivory-500 bg-background"
+>
   <Container>
     <section class="grid grid-cols-3 gap-4 items-center justify-between">
       <div class="justify-self-start">
         <Brand />
       </div>
-      <div class="justify-self-center w-auto">
+      <div class="justify-self-center w-auto invisible md:visible">
         <NavBar />
       </div>
-      <div class="flex gap-4 justify-self-end">
+      <div class="flex gap-1 lg:gap-3 justify-self-end">
         <LocaleSwitcher />
         <ThemeSwitcher />
-        <SocialNetworks />
+        <SocialNetworks className="hidden md:flex" />
+
+        <Button
+          id="openMenu"
+          data-menu-toggle="menu"
+          variant="ghost"
+          size="icon"
+          className="md:hidden w-10 h-10 cursor-pointer"
+        >
+          <Burger className="h-6 w-6 stroke-ivory-700 dark:stroke-ivory-100" />
+        </Button>
       </div>
     </section>
   </Container>
+
+  <!-- Mobile menu -->
+  <section
+    id="mobileMenu"
+    class="fixed inset-0 bg-ivory-200 dark:bg-carbon-900 z-40 pt-4 px-5 mobile-menu transition-transform duration-300 ease-in-out translate-x-full"
+  >
+    <div class="w-full flex justify-end">
+      <Button
+        id="closeMenu"
+        data-menu-toggle="menu"
+        variant="ghost"
+        size="icon"
+        className="md:hidden w-10 h-10 cursor-pointer"
+      >
+        <CloseX className="h-6 w-6 stroke-ivory-700 dark:stroke-ivory-100" />
+      </Button>
+    </div>
+
+    <div class="pt-15">
+      <NavBar variant="mobile" />
+    </div>
+
+    <div class="flex justify-center gap-8 pt-5">
+      <SocialNetworks />
+    </div>
+  </section>
 </header>
+
+<script>
+  // Open mobile menu
+  const openMenu = document.getElementById("openMenu");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  openMenu?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("translate-x-full");
+  });
+
+  // Close mobile menu
+  const closeMenu = document.getElementById("closeMenu");
+
+  closeMenu?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("translate-x-full");
+  });
+</script>
