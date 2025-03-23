@@ -6,7 +6,7 @@ import Container from "@/components/shared/Container.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const experienceStartDate = new Date("2021-05-01");
+const experienceStartDate = new Date("2021-05-01 10:00:00");
 
 const calculateExperienceYears = (startDate: Date) => {
   const currentDate = new Date();
@@ -23,7 +23,7 @@ const experienceYears = calculateExperienceYears(experienceStartDate);
 const profile = {
   name: "Wilmer Rodríguez Sánchez",
   role: "Software Engineer",
-  description: `+${experienceYears} ${t("home.presentation.experience_description")}`,
+  description: `${t("home.presentation.experience_description")}`,
 };
 ---
 
@@ -45,6 +45,11 @@ const profile = {
           <p
             class="text-xl text-carbon-700 dark:text-ivory-200 mb-6 leading-relaxed font-georgia"
           >
+            <span
+              title={`${t("home.presentation.from")} ${experienceStartDate.toLocaleDateString(lang)}`}
+            >
+              +{experienceYears}
+            </span>
             {profile.description}
           </p>
         </div>

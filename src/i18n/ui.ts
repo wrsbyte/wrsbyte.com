@@ -31,6 +31,7 @@ export const ui = {
 
     // home
     "home.presentation.experience_description": "years of experience as a Software Engineer. Design and creation of scalable and maintainable software, user-centered. Looking for the most optimal solutions to big problems, aware of the context. Lover of software engineering, data science, and intelligent systems.",
+    "home.presentation.from": "From",
   },
   es: {
     // Navbar
@@ -59,5 +60,6 @@ export const ui = {
     // home
     "home.presentation.experience_description":
       "años de experiencia como Ingeniero de Software. Diseño y creación de software escalable y mantenible, centrado en el usuario. Buscando las soluciones más óptimas a grandes problemas, consciente del contexto. Amante de la ingeniería de software, ciencia de datos y sistemas inteligentes.",
+    "home.presentation.from": "Desde",
   },
 } as const;
