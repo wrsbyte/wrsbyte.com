@@ -4,6 +4,10 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 
 import Link from "./Link.astro";
 
+interface Props {
+  variant?: "default" | "mobile";
+}
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -25,12 +29,28 @@ const menuItems = [
     link: getRelativeLocaleUrl(lang, "/#contact"),
   },
 ];
+
+const { variant = "default" } = Astro.props;
+
+const variantClasses = {
+  default: "flex space-x-8",
+  mobile: "flex flex-col space-y-5",
+};
 ---
 
-<nav class="flex space-x-8">
+<nav class:list={[variantClasses[variant]]}>
   {
     menuItems.map((item, index) => {
-      return <Link href={item.link}>{item.name}</Link>;
+      return (
+        <span
+          class:list={[
+            variant === "mobile" &&
+              "w-full pb-5 text-center border-b border-ivory-500",
+          ]}
+        >
+          <Link href={item.link}>{item.name}</Link>
+        </span>
+      );
     })
   }
 </nav>
