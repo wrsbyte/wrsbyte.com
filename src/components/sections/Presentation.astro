@@ -1,5 +1,10 @@
 ---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
 import Container from "@/components/shared/Container.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const experienceStartDate = new Date("2021-05-01");
 
@@ -18,24 +23,32 @@ const experienceYears = calculateExperienceYears(experienceStartDate);
 const profile = {
   name: "Wilmer Rodríguez Sánchez",
   role: "Software Engineer",
-  description: `+${experienceYears} años de experiencia como Ingeniero de Software. Diseño y creación de software escalable y mantenible, centrado en el usuario. Buscando las soluciones más óptimas a grandes problemas, consciente del contexto. Amante de la ingeniería de software, ciencia de datos y sistemas inteligentes.`,
+  description: `+${experienceYears} ${t("home.presentation.experience_description")}`,
 };
 ---
 
 <Container tag="section">
-  <article class="mb-10 scroll-smooth" id="presentation">
-    <h1 class="text-4xl font-grenze mb-2">
-      {profile.name}
-    </h1>
-
-    <h2 class="text-xl font-georgia italic text-ivory-700">
-      {profile.role}
-    </h2>
-
-    <hr class="border-t-2 border-ivory-500/20 my-8" />
-
-    <p class="text-lg leading-relaxed">
-      {profile.description}
-    </p>
-  </article>
+  <div class="border-t border-b border-ivory-500 py-12">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h1
+          class="font-grenze text-5xl font-bold tracking-tight mb-4 text-center"
+        >
+          {profile.name}
+        </h1>
+        <h2
+          class="font-mono text-2xl text-center mb-8 font-bricolage-grotesque"
+        >
+          {profile.role}
+        </h2>
+        <div class="max-w-3xl mx-auto">
+          <p
+            class="text-xl text-carbon-700 dark:text-ivory-200 mb-6 leading-relaxed font-georgia"
+          >
+            {profile.description}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </Container>

@@ -28,6 +28,9 @@ export const ui = {
 
     // Footer
     "footer.copyright": "Wilmer Rodríguez Sánchez. All rights reserved.",
+
+    // home
+    "home.presentation.experience_description": "years of experience as a Software Engineer. Design and creation of scalable and maintainable software, user-centered. Looking for the most optimal solutions to big problems, aware of the context. Lover of software engineering, data science, and intelligent systems.",
   },
   es: {
     // Navbar
@@ -50,6 +53,11 @@ export const ui = {
     "blog.post.detail.back": "Volver al blog",
 
     // Footer
-    "footer.copyright": "Wilmer Rodríguez Sánchez. Todos los derechos reservados.",
+    "footer.copyright":
+      "Wilmer Rodríguez Sánchez. Todos los derechos reservados.",
+
+    // home
+    "home.presentation.experience_description":
+      "años de experiencia como Ingeniero de Software. Diseño y creación de software escalable y mantenible, centrado en el usuario. Buscando las soluciones más óptimas a grandes problemas, consciente del contexto. Amante de la ingeniería de software, ciencia de datos y sistemas inteligentes.",
   },
 } as const;
