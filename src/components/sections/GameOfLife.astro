@@ -1,9 +1,400 @@
 ---
-import Container from "@/components/shared/Container.astro";
+import Pause from "@/components/icons/Pause.astro";
+import Play from "@/components/icons/Play.astro";
+import Refresh from "@/components/icons/Refresh.astro";
+import Shuffle from "@/components/icons/Shuffle.astro";
+import Button from "@/components/shared/Button.astro";
+
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<Container tag="section">
-  <p>
-    GameOfLife
-  </p>
-</Container>
+<section class="mb-10 border-b-2 border-ivory-500">
+  <header
+    class="px-5 md:px-12 flex justify-between flex-col lg:flex-row gap-2 py-4 lg:items-center"
+  >
+    <div>
+      <h2 class="font-mono text-lg font-semibold">
+        {t("home.game_of_life.title")}
+      </h2>
+      <p class="flex flex-wrap gap-1 font-mono text-sm">
+        <span>{t("home.game_of_life.generations")}:</span>
+        <span id="generations" class="w-[50px] text-center">-</span>
+        <span>| </span>
+        <span>{t("home.game_of_life.tip")}</span>
+      </p>
+    </div>
+
+    <div class="ml-auto">
+      <Button id="pause-play-button" variant="primary">
+        <div id="pause" class="flex items-center gap-1 px-2">
+          <Pause className="h-5 w-5" />
+          <span id="status">{t("home.game_of_life.pause")}</span>
+        </div>
+        <div id="play" class="flex items-center gap-1 px-2">
+          <Play className="h-5 w-5" />
+          <span id="status">{t("home.game_of_life.play")}</span>
+        </div>
+      </Button>
+      <Button id="reset-button" variant="secondary">
+        <div class="flex items-center gap-1 px-2">
+          <Refresh className="h-5 w-5" />
+          <span>{t("home.game_of_life.reset")}</span>
+        </div>
+      </Button>
+      <Button id="randomize-button" variant="secondary">
+        <div class="flex items-center gap-1 px-2">
+          <Shuffle className="h-5 w-5" />
+          <span>{t("home.game_of_life.randomize")}</span>
+        </div>
+      </Button>
+    </div>
+  </header>
+
+  <div class="w-full overflow-auto">
+    <canvas id="gameOfLife" class="w-full mx-auto"></canvas>
+  </div>
+</section>
+
+<script>
+  const gameOfLifeCanvas = document.getElementById(
+    "gameOfLife"
+  ) as HTMLCanvasElement | null;
+  const pausePlayButton = document.getElementById("pause-play-button");
+  const resetButton = document.getElementById("reset-button");
+  const randomizeButton = document.getElementById("randomize-button");
+  const generationsElement = document.getElementById("generations");
+
+  if (
+    !gameOfLifeCanvas ||
+    !pausePlayButton ||
+    !resetButton ||
+    !randomizeButton ||
+    !generationsElement
+  ) {
+    throw new Error("Canvas or button not found");
+  }
+
+  const scale = window.devicePixelRatio;
+
+  const CELL_SIZE = 14;
+  const GRID_ROWS = 25;
+  const TIMEOUT = 150;
+
+  const state: {
+    grid: boolean[][];
+    gridCols: number;
+    generation: number;
+    isRunning: boolean;
+    isDrawing: boolean;
+    drawMode: null | "add" | "remove";
+    timeout: null | number;
+    requestId: null | number;
+    isDarkMode: boolean;
+  } = {
+    grid: [],
+    gridCols: 60,
+    generation: 0,
+    isRunning: true,
+    isDrawing: false,
+    drawMode: null,
+    timeout: null,
+    requestId: null,
+    isDarkMode: document.documentElement.classList.contains("dark"),
+  };
+
+  // game loop
+
+  const renderGameOfLife = () => {
+    const ctx = gameOfLifeCanvas.getContext("2d");
+    if (!ctx) {
+      throw new Error("Canvas context not found");
+    }
+
+    gameOfLifeCanvas.width = CELL_SIZE * state.gridCols * scale;
+    gameOfLifeCanvas.height = CELL_SIZE * GRID_ROWS * scale;
+    gameOfLifeCanvas.style.width = `${CELL_SIZE * state.gridCols * scale}px`;
+    gameOfLifeCanvas.style.height = `${CELL_SIZE * GRID_ROWS * scale}px`;
+
+    ctx.clearRect(0, 0, gameOfLifeCanvas.width, gameOfLifeCanvas.height);
+
+    const gridColor = state.isDarkMode ? "#3A3A3C" : "#C5BDA8"; // ivory-500 or darker in dark mode
+    const cellColor = state.isDarkMode ? "#F9F8F5" : "#1C1F21"; // carbon-700 or lighter in dark mode
+
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 0.5;
+
+    // grid: vertical lines
+    for (let i = 0; i <= state.gridCols; i++) {
+      ctx.beginPath();
+      ctx.moveTo(i * CELL_SIZE, 0);
+      ctx.lineTo(i * CELL_SIZE, gameOfLifeCanvas.height);
+      ctx.stroke();
+    }
+
+    // grid: horizontal lines
+    for (let i = 0; i <= GRID_ROWS; i++) {
+      ctx.beginPath();
+      ctx.moveTo(0, i * CELL_SIZE);
+      ctx.lineTo(gameOfLifeCanvas.width, i * CELL_SIZE);
+      ctx.stroke();
+    }
+
+    // draw cells
+    ctx.fillStyle = cellColor;
+    state.grid.forEach((row, i) => {
+      row.forEach((cell, cellI) => {
+        if (cell) {
+          const spaceBetween = 1;
+          ctx.fillRect(
+            cellI * CELL_SIZE + spaceBetween,
+            i * CELL_SIZE + spaceBetween,
+            CELL_SIZE - spaceBetween,
+            CELL_SIZE - spaceBetween
+          );
+        }
+      });
+    });
+  };
+
+  const updateGridSize = () => {
+    const parentCurrentWidth = gameOfLifeCanvas.parentElement?.clientWidth ?? 0;
+    const newCols = Math.floor(parentCurrentWidth / CELL_SIZE);
+
+    state.gridCols = newCols;
+    renderGameOfLife();
+  };
+
+  const initializeGrid = () => {
+    const initialGrid = Array(GRID_ROWS)
+      .fill(null)
+      .map(() => Array(state.gridCols).fill(false));
+
+    const centerCol = Math.floor(state.gridCols / 2);
+    const centerRow = Math.floor(GRID_ROWS / 2);
+
+    // base figure
+    initialGrid[centerRow][centerCol] = true;
+    initialGrid[centerRow + 1][centerCol + 1] = true;
+    initialGrid[centerRow + 1][centerCol + 2] = true;
+    initialGrid[centerRow][centerCol + 2] = true;
+    initialGrid[centerRow - 1][centerCol + 2] = true;
+
+    state.grid = initialGrid;
+    state.generation = 0;
+
+    renderGameOfLife();
+  };
+
+  // game of life
+
+  const countNeighbors = (grid: boolean[][], row: number, col: number) => {
+    let count = 0;
+
+    for (let i = -1; i <= 1; i++) {
+      for (let j = -1; j <= 1; j++) {
+        if (i === 0 && j === 0) continue;
+
+        const newRow = row + i;
+        const newCol = col + j;
+
+        if (
+          newRow >= 0 &&
+          newRow < grid.length &&
+          newCol >= 0 &&
+          newCol < grid[0].length &&
+          grid[newRow][newCol]
+        ) {
+          count++;
+        }
+      }
+    }
+
+    return count;
+  };
+
+  const calculateNextGeneration = () => {
+    const newGrid = state.grid.map((row, rowI) => {
+      return row.map((cell, cellI) => {
+        const neighbors = countNeighbors(state.grid, rowI, cellI);
+
+        if (cell) {
+          // Any live cell with fewer than 2 or more than 3 live neighbors dies
+          return neighbors === 2 || neighbors === 3;
+        }
+
+        // Any dead cell with exactly 3 live neighbors becomes alive
+        return neighbors === 3;
+      });
+    });
+
+    state.grid = newGrid;
+    state.generation++;
+  };
+
+  // game loop
+
+  const gameLoop = () => {
+    if (!state.isRunning) {
+      return;
+    }
+
+    const tick = () => {
+      calculateNextGeneration();
+      renderGameOfLife();
+
+      generationsElement.textContent = state.generation.toString();
+
+      state.timeout = setTimeout(() => {
+        state.requestId = requestAnimationFrame(tick);
+      }, TIMEOUT);
+    };
+
+    state.requestId = requestAnimationFrame(tick);
+  };
+
+  const togglePausePlayIcons = () => {
+    const pause = pausePlayButton.querySelector("#pause");
+    const play = pausePlayButton.querySelector("#play");
+
+    if (!pause || !play) {
+      throw new Error("Pause or play button not found");
+    }
+
+    const isRunning = state.isRunning;
+    if (isRunning) {
+      pause.classList.remove("hidden");
+      play.classList.add("hidden");
+    } else {
+      pause.classList.add("hidden");
+      play.classList.remove("hidden");
+    }
+  };
+
+  function drawAddOrRemoveCell(clientX: number, clientY: number) {
+    if (!gameOfLifeCanvas) {
+      throw new Error("Canvas not found");
+    }
+
+    const rect = gameOfLifeCanvas.getBoundingClientRect();
+
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+
+    const col = Math.floor((x / CELL_SIZE) * scale);
+    const row = Math.floor((y / CELL_SIZE) * scale);
+
+    if (row < 0 || row >= GRID_ROWS || col < 0 || col >= state.gridCols) {
+      return;
+    }
+
+    if (state.drawMode === "add") {
+      state.grid[row][col] = true;
+    } else if (state.drawMode === "remove") {
+      state.grid[row][col] = false;
+    }
+
+    renderGameOfLife();
+  }
+
+  // event listeners
+
+  pausePlayButton.addEventListener("click", () => {
+    state.isRunning = !state.isRunning;
+
+    togglePausePlayIcons();
+
+    // in play mode
+    if (state.isRunning) {
+      gameLoop();
+      return;
+    }
+
+    // in pause mode
+    if (state.timeout) {
+      clearTimeout(state.timeout);
+    }
+    if (state.requestId) {
+      cancelAnimationFrame(state.requestId);
+    }
+  });
+
+  resetButton.addEventListener("click", () => {
+    state.isRunning = true;
+    state.isDrawing = false;
+    state.drawMode = null;
+
+    togglePausePlayIcons();
+
+    if (state.timeout) {
+      clearTimeout(state.timeout);
+    }
+    if (state.requestId) {
+      cancelAnimationFrame(state.requestId);
+    }
+
+    initializeGrid();
+    gameLoop();
+  });
+
+  randomizeButton.addEventListener("click", () => {
+    state.grid = Array(GRID_ROWS)
+      .fill(null)
+      .map(() =>
+        Array(state.gridCols)
+          .fill(false)
+          .map(() => Math.random() > 0.8)
+      );
+
+    renderGameOfLife();
+  });
+
+  gameOfLifeCanvas.addEventListener("mousedown", (e) => {
+    state.isDrawing = true;
+    // add with left click, remove with right click
+    state.drawMode = e.button === 2 ? "remove" : "add";
+
+    drawAddOrRemoveCell(e.clientX, e.clientY);
+  });
+
+  gameOfLifeCanvas.addEventListener("mouseup", () => {
+    state.isDrawing = false;
+    state.drawMode = null;
+  });
+
+  gameOfLifeCanvas.addEventListener("mousemove", (e) => {
+    if (!state.isDrawing) {
+      return;
+    }
+
+    drawAddOrRemoveCell(e.clientX, e.clientY);
+  });
+
+  gameOfLifeCanvas.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+  });
+
+  window.addEventListener("resize", updateGridSize);
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName !== "class") {
+        return;
+      }
+
+      const isDark = document.documentElement.classList.contains("dark");
+      state.isDarkMode = isDark;
+      renderGameOfLife();
+    });
+  });
+
+  observer.observe(document.documentElement, { attributes: true });
+
+  // initialize
+  togglePausePlayIcons();
+  updateGridSize();
+  initializeGrid();
+  gameLoop();
+</script>

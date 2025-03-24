@@ -21,11 +21,11 @@ const baseClasses =
 
 const variantClasses = {
   primary:
-    "bg-carbon-700 text-ivory-100 hover:bg-carbon-900 dark:bg-ivory-700 dark:text-carbon-900 dark:hover:bg-ivory-500",
+    "bg-carbon-700 text-ivory-100 stroke-ivory-100 hover:bg-carbon-900 dark:bg-ivory-700 dark:stroke-ivory-100 dark:text-ivory-100 dark:hover:bg-ivory-700/90 transition duration-300 hover:scale-[1.01]",
   secondary:
-    "bg-ivory-200 text-carbon-700 hover:bg-ivory-700 hover:text-ivory-100 dark:bg-carbon-800 dark:text-ivory-100 dark:hover:bg-carbon-900",
+    "bg-ivory-200 text-carbon-700 stroke-carbon-900 hover:bg-ivory-700 hover:stroke-ivory-100 hover:text-ivory-100 dark:bg-carbon-700 dark:stroke-ivory-100 dark:text-ivory-100 dark:hover:bg-carbon-700/50",
   outline:
-    "border border-ivory-500 bg-transparent hover:bg-ivory-200 text-carbon-700 dark:text-ivory-100 dark:hover:bg-carbon-800",
+    "border border-ivory-500 bg-ivory-200 hover:bg-ivory-200 text-carbon-700 stroke-carbon-700 dark:text-ivory-100 dark:stroke-ivory-100 dark:hover:bg-carbon-700",
   ghost: "text-ivory-700 dark:text-ivory-100",
   accent:
     "bg-ivory-700 text-ivory-100 hover:bg-ivory-800 dark:bg-ivory-600 dark:hover:bg-ivory-700",
@@ -39,11 +39,11 @@ const sizeClasses = {
 };
 
 const spanBgClasses = {
-  primary: "bg-carbon-900 dark:bg-ivory-500",
+  primary: "bg-carbon-900 dark:bg-ivory-700",
   secondary: "bg-ivory-700 dark:bg-carbon-900",
-  outline: "bg-ivory-200 dark:bg-carbon-800",
+  outline: "bg-ivory-500 dark:bg-carbon-700/50",
   ghost: "bg-ivory-500/30 dark:bg-ivory-700",
-  accent: "bg-ivory-800 dark:bg-ivory-700",
+  accent: "bg-ivory-500 dark:bg-ivory-700",
 };
 
 ---
