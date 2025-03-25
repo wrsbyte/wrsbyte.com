@@ -1,5 +1,16 @@
+---
+
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const homePath = getRelativeLocaleUrl(lang, "/");
+---
+
 <a
-  href="/"
+  href={homePath}
   class="font-grenze font-bold text-3xl select-none hover:scale-105 transition-all"
 >
   wrsbyte
