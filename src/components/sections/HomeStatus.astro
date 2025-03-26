@@ -34,7 +34,7 @@ const navigationItems = [
         class="flex space-x-8 justify-self-center items-center justify-center columns-auto w-full"
       >
         {
-          navigationItems.map((item, index) => {
+          navigationItems.map((item) => {
             return <Link href={item.link}>{item.name}</Link>;
           })
         }

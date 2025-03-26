@@ -51,7 +51,7 @@ const year = new Date().getFullYear().toString();
         class="flex space-x-6 flex-wrap justify-center md:justify-start lg:flex-nowrap w-full"
       >
         {
-          menuItems.map((item, index) => {
+          menuItems.map((item) => {
             return <Link href={item.link}>{item.name}</Link>;
           })
         }
