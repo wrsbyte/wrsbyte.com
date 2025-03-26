@@ -4,6 +4,7 @@ import Play from "@/components/icons/Play.astro";
 import Refresh from "@/components/icons/Refresh.astro";
 import Shuffle from "@/components/icons/Shuffle.astro";
 import Button from "@/components/shared/Button.astro";
+import GameOfLifeRules from "@/components/shared/GameOfLifeRules.astro";
 
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
@@ -53,8 +54,9 @@ const t = useTranslations(lang);
     </div>
   </header>
 
-  <div class="w-full overflow-hidden h-[350px]">
+  <div class="relative w-full overflow-hidden h-[350px]">
     <canvas id="gameOfLife" class="w-full mx-auto"></canvas>
+    <GameOfLifeRules />
   </div>
 </section>
 

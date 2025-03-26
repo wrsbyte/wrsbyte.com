@@ -26,11 +26,13 @@ const { size } = Astro.props;
   data-trigger-id={triggerId}
   class="hidden backdrop-blur-sm bg-carbon-700/5 max-h-screen max-w-screen w-full h-full"
 >
-  <div class="flex items-center justify-center h-full">
+  <div
+    class="flex items-center justify-center h-full text-carbon-900 dark:text-ivory-100 stroke-carbon-900 dark:stroke-ivory-100"
+  >
     <section
       id="modal-content"
       class:list={[
-        "relative mx-auto rounded-lg shadow-sm border bg-ivory-200 dark:bg-gray-700",
+        "relative mx-auto rounded-lg shadow-sm border bg-ivory-200 dark:bg-carbon-900",
         sizes[size],
       ]}
     >
@@ -47,7 +49,7 @@ const { size } = Astro.props;
           data-modal-close-button
           aria-label="Close"
         >
-          <CloseX className="h-5 w-5 stroke-carbon-700" />
+          <CloseX className="h-5 w-5 stroke-carbon-900 dark:stroke-ivory-100" />
         </Button>
       </header>
 

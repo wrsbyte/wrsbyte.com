@@ -60,6 +60,20 @@ export const ui = {
     "availability_to_work.modal.type_title": "Employment Type",
     "availability_to_work.modal.type_description":
       "Open to full-time positions, contract work, and freelance projects.",
+
+    "gameOfLife.modal.rules.button": "Game of Life Rules",
+    "gameOfLife.modal.rules.title": "Conway's Game of Life",
+    "gameOfLife.modal.description":
+      "Conway's Game of Life is a cellular automaton devised by mathematician John Conway in 1970. It's a zero-player game, meaning its evolution is determined by its initial state, with no further input from humans.",
+    "gameOfLife.modal.rules": "Rules",
+    "gameOfLife.modal.rule1":
+      "Any live cell with fewer than two live neighbors dies (underpopulation)",
+    "gameOfLife.modal.rule2":
+      "Any live cell with two or three live neighbors lives on",
+    "gameOfLife.modal.rule3":
+      "Any live cell with more than three live neighbors dies (overpopulation)",
+    "gameOfLife.modal.rule4":
+      "Any dead cell with exactly three live neighbors becomes alive (reproduction)",
   },
   es: {
     // Navbar
@@ -116,5 +130,19 @@ export const ui = {
     "availability_to_work.modal.type_title": "Tipo de empleo",
     "availability_to_work.modal.type_description":
       "Abierto a posiciones de tiempo completo, trabajo por contrato y proyectos freelance.",
+
+    "gameOfLife.modal.rules.button": "Reglas del Juego de la Vida",
+    "gameOfLife.modal.rules.title": "Juego de la Vida de Conway",
+    "gameOfLife.modal.description":
+      "El Juego de la Vida de Conway es un autómata celular diseñado por el matemático John Conway en 1970. Es un juego de cero jugadores, lo que significa que su evolución está determinada por su estado inicial, sin más intervención humana.",
+    "gameOfLife.modal.rules": "Reglas",
+    "gameOfLife.modal.rule1":
+      "Cualquier célula viva con menos de dos vecinos vivos muere (subpoblación)",
+    "gameOfLife.modal.rule2":
+      "Cualquier célula viva con dos o tres vecinos vivos vive",
+    "gameOfLife.modal.rule3":
+      "Cualquier célula viva con más de tres vecinos vivos muere (sobrepoblación)",
+    "gameOfLife.modal.rule4":
+      "Cualquier célula muerta con exactamente tres vecinos vivos se convierte en viva (reproducción)",
   },
 } as const;

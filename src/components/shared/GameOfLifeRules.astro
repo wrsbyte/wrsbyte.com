@@ -1,0 +1,49 @@
+---
+import BookOpen from "@/components/icons/BookOpen.astro";
+import Button from "@/components/shared/Button.astro";
+import Modal from "@/components/shared/Modal.astro";
+
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div
+  class="absolute bottom-6 right-6 z-10 rounded-md shadow-lg flex items-center gap-2"
+>
+  <Button
+    id="gameOfLifeRulesModal"
+    variant="outline"
+    size="default"
+    className="not-hover:bg-transparent not-hover:backdrop-blur-xs"
+  >
+    <BookOpen className="h-5 w-5 stroke-carbon-900 dark:stroke-ivory-100" />
+    {t("gameOfLife.modal.rules.button")}
+  </Button>
+
+  <Modal triggerId="gameOfLifeRulesModal" size="md">
+    <span slot="title">
+      {t("gameOfLife.modal.rules.title")}:
+    </span>
+    <main slot="content" class="space-y-4">
+      <div>
+        <p class="mb-4">
+          {t("gameOfLife.modal.description")}
+        </p>
+
+        <h4 class="text-lg font-medium font-bricolage-grotesque mb-2">
+          {t("gameOfLife.modal.rules")}
+        </h4>
+        <ul
+          class="list-disc pl-5 space-y-2 text-carbon-700 dark:text-ivory-100"
+        >
+          <li>{t("gameOfLife.modal.rule1")}</li>
+          <li>{t("gameOfLife.modal.rule2")}</li>
+          <li>{t("gameOfLife.modal.rule3")}</li>
+          <li>{t("gameOfLife.modal.rule4")}</li>
+        </ul>
+      </div>
+    </main>
+  </Modal>
+</div>
