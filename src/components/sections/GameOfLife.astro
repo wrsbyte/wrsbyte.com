@@ -33,7 +33,7 @@ const t = useTranslations(lang);
           <Pause className="h-5 w-5" />
           <span id="status">{t("home.game_of_life.pause")}</span>
         </div>
-        <div id="play" class="flex items-center gap-1 px-2">
+        <div id="play" class="hidden flex items-center gap-1 px-2">
           <Play className="h-5 w-5" />
           <span id="status">{t("home.game_of_life.play")}</span>
         </div>
@@ -53,7 +53,7 @@ const t = useTranslations(lang);
     </div>
   </header>
 
-  <div class="w-full overflow-auto">
+  <div class="w-full overflow-auto h-[350px]">
     <canvas id="gameOfLife" class="w-full mx-auto"></canvas>
   </div>
 </section>
@@ -90,7 +90,7 @@ const t = useTranslations(lang);
     isRunning: boolean;
     isDrawing: boolean;
     drawMode: null | "add" | "remove";
-    timeout: null | number;
+    timeout: null | any;
     requestId: null | number;
     isDarkMode: boolean;
   } = {
