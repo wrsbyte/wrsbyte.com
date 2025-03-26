@@ -21,13 +21,6 @@ export default defineConfig({
     },
   },
 
-  redirects: {
-    '/': {
-      status: 200,
-      destination: '/es'
-    }
-  },
-
   integrations: [sitemap()],
   adapter: vercel(),
 });

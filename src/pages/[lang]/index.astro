@@ -6,10 +6,7 @@ import Footer from "@/components/shared/Footer.astro";
 import Header from "@/components/shared/Header.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
 
-import { getLangFromUrl, getLanguages, useTranslations } from "@/i18n/utils";
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+import { getLanguages } from "@/i18n/utils";
 
 export async function getStaticPaths() {
   const languages = getLanguages();
