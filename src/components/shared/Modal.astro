@@ -1,0 +1,114 @@
+---
+import CloseX from "@/components/icons/CloseX.astro";
+import Button from "@/components/shared/Button.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+interface Props {
+  triggerId: string;
+  size: "sm" | "md" | "lg";
+}
+
+const { triggerId } = Astro.props;
+const sizes = {
+  sm: "w-[95%] md:w-[300px]",
+  md: "w-[95%] md:w-[500px]",
+  lg: "w-[95%] md:w-[800px]",
+};
+
+const { size } = Astro.props;
+---
+
+<dialog
+  data-modal
+  data-trigger-id={triggerId}
+  class="hidden backdrop-blur-sm bg-carbon-700/5 max-h-screen max-w-screen w-full h-full"
+>
+  <div class="flex items-center justify-center h-full">
+    <section
+      id="modal-content"
+      class:list={[
+        "relative mx-auto rounded-lg shadow-sm border bg-ivory-200 dark:bg-gray-700",
+        sizes[size],
+      ]}
+    >
+      <header
+        class="flex justify-between items-center p-4 border-b border-ivory-500"
+      >
+        <h3 class="font-mono text-xl font-medium flex">
+          <slot name="title" />
+        </h3>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          data-modal-close-button
+          aria-label="Close"
+        >
+          <CloseX className="h-5 w-5 stroke-carbon-700" />
+        </Button>
+      </header>
+
+      <section class="p-4">
+        <slot name="content" />
+      </section>
+
+      <footer class="p-4 border-t border-ivory-500 flex justify-end">
+        <Button variant="primary" data-modal-close-button aria-label="Close">
+          {t("availability_to_work.modal.close")}
+        </Button>
+      </footer>
+    </section>
+  </div>
+</dialog>
+
+<script>
+  const dialogs =
+    document.querySelectorAll<HTMLDialogElement>("dialog[data-modal]");
+
+  dialogs.forEach((dialog) => {
+    dialog.close();
+    dialog.classList.add("hidden");
+
+    const triggerId = dialog.getAttribute("data-trigger-id");
+
+    if (!triggerId) return;
+
+    const trigger = document.getElementById(triggerId);
+    if (!trigger) return;
+
+    trigger.addEventListener("click", () => {
+      dialog.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+      document.body.style.height = "100%";
+      if (dialog.open) return;
+      dialog.showModal();
+    });
+
+    const closeButtons = dialog.querySelectorAll<HTMLButtonElement>(
+      "[data-modal-close-button]"
+    );
+
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        dialog.close();
+      });
+    });
+
+    dialog.addEventListener("close", () => {
+      dialog.classList.add("hidden");
+      document.body.style.overflow = "auto";
+      document.body.style.height = "inherit";
+    });
+
+    // outside click
+    dialog.addEventListener("click", (event) => {
+      if (!event.target || !dialog.open) return;
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+  });
+</script>
