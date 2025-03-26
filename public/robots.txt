@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Host
+Host: https://wrsbyte.com
+
+# Sitemaps
+Sitemap: https://wrsbyte.com/sitemap-index.xml
