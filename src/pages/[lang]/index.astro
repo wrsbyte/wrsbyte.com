@@ -1,7 +1,7 @@
 ---
 import GameOfLife from "@/components/sections/GameOfLife.astro";
-import HomeStatus from "@/components/sections/HomeStatus.astro";
 import Presentation from "@/components/sections/Presentation.astro";
+import AvailableToWorkBadge from "@/components/shared/AvailableToWorkBadge.astro";
 import Footer from "@/components/shared/Footer.astro";
 import Header from "@/components/shared/Header.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
@@ -23,6 +23,7 @@ const description = "Wilmer";
 <RootLayout title={title} description={description}>
   <Header />
   <main class="flex-1">
+    <AvailableToWorkBadge />
     <GameOfLife />
     <!-- <HomeStatus /> -->
     <Presentation />

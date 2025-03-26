@@ -11,10 +11,12 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const posts = await getCollection("blog");
-const localizedPosts = posts.filter((post) => post.slug.startsWith(`${lang}/`)).map((post) => ({
-  ...post,
-  slug: post.slug.replace(`${lang}/`, ""),
-}));
+const localizedPosts = posts
+  .filter((post) => post.slug.startsWith(`${lang}/`))
+  .map((post) => ({
+    ...post,
+    slug: post.slug.replace(`${lang}/`, ""),
+  }));
 ---
 
 <Container className="overflow-hidden py-12">

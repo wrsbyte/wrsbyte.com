@@ -33,7 +33,7 @@ const description = "blog";
 <RootLayout title={title} description={description}>
   <Header />
   <main class="flex-1">
-    <PostDetail title={page.data.title} date={page.data.date}>
+    <PostDetail title={page.data.title} date={page.data.date} slug={page.slug}>
       <div
         class="prose dark:prose-invert w-full max-w-[75ch] mx-auto prose-headings:text-carbon-900 prose-headings:dark:text-ivory-100 prose-p:text-carbon-700 prose-p:dark:text-ivory-100 prose-p:text-lg prose-li:text-lg"
       >
