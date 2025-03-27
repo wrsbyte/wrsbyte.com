@@ -1,0 +1,39 @@
+---
+import EducationCard from "@/components/shared/EducationCard.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+type Institution = "university" | "bootcamp";
+const institutions: Institution[] = ["university", "bootcamp"];
+
+const educations = institutions.map((inst) => {
+  const title = t(`home.education.${inst}.title`);
+  const institution = t(`home.education.${inst}.institution`);
+  const period = t(`home.education.${inst}.period`);
+
+  return {
+    title,
+    institution,
+    period,
+  };
+});
+---
+
+<div class="mb-10">
+  <h2 class="text-3xl font-grenze font-bold mb-6 tracking-tight">
+    {t("home.education.title")}
+  </h2>
+  <div class="space-y-5">
+    {
+      educations.map(({ title, institution, period }) => (
+        <EducationCard
+          title={title}
+          institution={institution}
+          period={period}
+        />
+      ))
+    }
+  </div>
+</div>

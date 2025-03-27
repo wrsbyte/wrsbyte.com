@@ -119,7 +119,7 @@ export const ui = {
     "home.experience.company.iieg.description":
       "Developed a predictive model for assessing the severity of cyclist accident risks. Performed real-time traffic inference in geographic areas with a history of accidents. Managed servers, scheduled tasks, and deployed to production.",
     "home.experience.company.delfin.title": "Data Science Intern",
-    "home.experience.company.delfin.company": "Delfín México",
+    "home.experience.company.delfin.company": "Delfin Mexico",
     "home.experience.company.delfin.period": "June 2022 - August 2022",
     "home.experience.company.delfin.description":
       "Developed a predictive model to validate the presence of a STEM profile in undergraduate applicants using EEG and EyeTracking. Applied feature engineering techniques, including variable selection and extraction, to raw data. Conducted data behavior analysis, presented results, and provided study conclusions.",
@@ -128,6 +128,15 @@ export const ui = {
     "home.experience.company.wtredata.period": "May 2021 - January 2022",
     "home.experience.company.wtredata.description":
       "Developed third-party solutions using agile methodologies and rapid delivery practices. Participated in the entire software lifecycle, including client communication, requirements gathering, and business understanding.",
+
+    // Education
+    "home.education.title": "Education",
+    "home.education.university.title": "Systems Engineering",
+    "home.education.university.institution": "Universidad de Pamplona",
+    "home.education.university.period": "April 2019 - December 2024",
+    "home.education.bootcamp.title": "Software Development Bootcamp",
+    "home.education.bootcamp.institution": "MinTic - UIS Colombia",
+    "home.education.bootcamp.period": "May 2021 – December 2021",
   },
   es: {
     // Navbar
@@ -257,5 +266,14 @@ export const ui = {
     "home.experience.company.wtredata.period": "Mayo 2021 - Enero 2022",
     "home.experience.company.wtredata.description":
       "Desarrollé soluciones de terceros utilizando metodologías ágiles y prácticas de entrega rápida. Participé en todo el ciclo de vida del software, incluida la comunicación con el cliente, la recopilación de requisitos y la comprensión del negocio.",
+
+    // Education
+    "home.education.title": "Educación",
+    "home.education.university.title": "Ingeniería de Sistemas",
+    "home.education.university.institution": "Universidad de Pamplona",
+    "home.education.university.period": "Abril 2019 - Diciembre 2024",
+    "home.education.bootcamp.title": "Bootcamp de Desarrollo de Software",
+    "home.education.bootcamp.institution": "MinTic - UIS Colombia",
+    "home.education.bootcamp.period": "Mayo 2021 – Diciembre 2021",
   },
 } as const;
