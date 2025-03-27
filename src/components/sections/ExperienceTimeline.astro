@@ -1,0 +1,45 @@
+---
+import ExperienceItem from "@/components/shared/ExperienceItem.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+type Companies = "shf" | "citix" | "iieg" | "delfin" | "wtredata";
+const companies: Companies[] = ["shf", "citix", "iieg", "delfin", "wtredata"];
+
+const experiences = companies.map((cpn) => {
+  const title = t(`home.experience.company.${cpn}.title`);
+  const company = t(`home.experience.company.${cpn}.company`);
+  const period = t(`home.experience.company.${cpn}.period`);
+  const description = t(`home.experience.company.${cpn}.description`);
+
+  return {
+    title,
+    company,
+    period,
+    description,
+  };
+});
+---
+
+<div id="experience">
+  <h2 class="text-3xl font-grenze font-bold mb-6 tracking-tight">
+    {t("home.experience.title")}
+  </h2>
+
+  <div class="space-y-12 ml-3">
+    {
+      experiences.map(({ title, company, period, description }) => {
+        return (
+          <ExperienceItem
+            title={title}
+            company={company}
+            period={period}
+            description={description}
+          />
+        );
+      })
+    }
+  </div>
+</div>

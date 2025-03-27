@@ -1,0 +1,39 @@
+---
+import Skill from "@/components/shared/Skill.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const skills: string[] = [
+  t("home.skills.problem_solving"),
+  t("home.skills.team_player"),
+  t("home.skills.analytical_and_pragmatic"),
+  t("home.skills.agile_principles"),
+  t("home.skills.logical_and_critical_thinking"),
+  t("home.skills.object_oriented_programming"),
+  t("home.skills.software_design_patterns_and_principles"),
+  t("home.skills.machine_learning"),
+  t("home.skills.supervised_predictive_models"),
+  t("home.skills.feature_engineering"),
+  t("home.skills.git_github"),
+  t("home.skills.rest_api"),
+  t("home.skills.javascript"),
+  t("home.skills.typescript"),
+  t("home.skills.nodejs"),
+  t("home.skills.python"),
+  t("home.skills.sql"),
+  t("home.skills.linux"),
+  t("home.skills.angular"),
+  t("home.skills.django"),
+];
+---
+
+<div class="console-card">
+  <h2 class="text-3xl font-bold mb-4 font-grenze tracking-tight">
+    {t("home.skills.title")}
+  </h2>
+  <div class="flex flex-wrap gap-2">
+    {skills.map((skill) => <Skill skill={skill} />)}
+  </div>
+</div>

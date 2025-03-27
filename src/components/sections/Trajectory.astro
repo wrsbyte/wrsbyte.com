@@ -1,7 +1,17 @@
 ---
+import ExperienceTimeline from "@/components/sections/ExperienceTimeline.astro";
+import Skills from "@/components/sections/Skills.astro";
 import Container from "@/components/shared/Container.astro";
 ---
 
-<Container tag="section">
-  <p>Trajectory</p>
+<Container tag="section" className="">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-14">
+    <div class="lg:col-span-7">
+      <ExperienceTimeline />
+    </div>
+
+    <div class="lg:col-span-5">
+      <Skills />
+    </div>
+  </div>
 </Container>

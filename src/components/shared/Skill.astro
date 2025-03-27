@@ -1,0 +1,22 @@
+---
+interface Props {
+  skill: string;
+}
+
+const { skill } = Astro.props;
+---
+
+<span
+  class:list={[
+    "px-3 py-1 bg-ivory-200 dark:bg-carbon-700 text-sm border border-ivory-500 font-mono relative overflow-hidden select-none cursor-default",
+    "transition-all duration-300",
+  ]}
+>
+  <span class="relative z-10">{skill}</span>
+  <span
+    class="absolute inset-0 bg-ivory-500 dark:bg-ivory-700 origin-left"
+    style={{
+      animation: "fillFromLeft 0.5s forwards",
+    }}></span>
+  )
+</span>

@@ -1,0 +1,128 @@
+---
+import Briefcase from "@/components/icons/Briefcase.astro";
+import Calendar from "@/components/icons/Calendar.astro";
+import Clock from "@/components/icons/Clock.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+interface Props {
+  title: string;
+  company: string;
+  period: string;
+  description: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { title, company, period, description } = Astro.props;
+const monthMap: Record<string, number> = {
+  january: 0,
+  enero: 0,
+  february: 1,
+  febrero: 1,
+  march: 2,
+  marzo: 2,
+  april: 3,
+  abril: 3,
+  may: 4,
+  mayo: 4,
+  june: 5,
+  junio: 5,
+  july: 6,
+  julio: 6,
+  august: 7,
+  agosto: 7,
+  september: 8,
+  septiembre: 8,
+  october: 9,
+  octubre: 9,
+  november: 10,
+  noviembre: 10,
+  december: 11,
+  diciembre: 11,
+};
+
+const parseDate = (input: string): Date => {
+  const now = new Date();
+  const trimmed = input.trim().toLowerCase();
+  if (trimmed === "presente" || trimmed === "present") {
+    return now;
+  }
+
+  const parts = trimmed.split(" ");
+  if (parts.length < 2) {
+    return now;
+  }
+
+  const monthName = parts[0];
+  const yearNum = Number(parts[1]);
+
+  if (!yearNum || monthMap[monthName] === undefined) {
+    return now;
+  }
+
+  return new Date(yearNum, monthMap[monthName]);
+};
+
+const calculateDuration = (period: string): string => {
+  const [startStr, endStr] = period.split("-").map((s) => s.trim());
+  const startDate = parseDate(startStr);
+  const endDate = parseDate(endStr);
+  let years = endDate.getFullYear() - startDate.getFullYear();
+  let months = endDate.getMonth() - startDate.getMonth();
+
+  if (months < 0) {
+    years -= 1;
+    months += 12;
+  }
+
+  const y = t("home.experience.years");
+
+  if (years === 0) {
+    return `${months}m`;
+  }
+
+  if (months === 0) {
+    return `${years}${y}`;
+  }
+
+  return `${years}${y} ${months}m`;
+};
+---
+
+<div class="relative pl-8 border-l-2 border-ivory-500">
+  <div
+    class="absolute w-4 h-4 bg-ivory-100 dark:bg-carbon-700 border-2 border-ivory-700 rounded-full -left-2 top-0"
+  >
+  </div>
+
+  <div class="mb-1 flex items-center justify-between">
+    <div
+      class="flex items-center text-xs text-carbon-700 dark:text-ivory-200 uppercase tracking-wider font-mono"
+    >
+      <Calendar
+        className="h-3 w-3 mr-1 stroke-carbon-900 dark:stroke-ivory-100"
+      />
+      {period}
+    </div>
+    <div
+      class="text-xs text-ivory-700 dark:text-ivory-500 font-mono flex items-center"
+    >
+      <Clock className="h-3 w-3 mr-1 stroke-ivory-700 dark:stroke-ivory-100" />
+      {calculateDuration(period)}
+    </div>
+  </div>
+
+  <h3 class="text-xl font-bold font-mono">{title}</h3>
+  <div
+    class="text-carbon-700 dark:text-ivory-200 mb-2 font-georgia flex items-center"
+  >
+    <Briefcase
+      className="h-4 w-4 mr-1 stroke-carbon-900 dark:stroke-ivory-100"
+    />
+    {company}
+  </div>
+  <p class="text-carbon-700 dark:text-ivory-200 font-georgia">
+    {description}
+  </p>
+</div>
