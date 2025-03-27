@@ -9,7 +9,7 @@ export const ui = {
   en: {
     // Navbar
     "nav.home": "Home",
-    "nav.experience": "home.Experience",
+    "nav.experience": "Experience",
     "nav.blog": "Blog",
     "nav.sitemap": "Sitemap",
     "nav.contact": "Contact",
@@ -137,6 +137,19 @@ export const ui = {
     "home.education.bootcamp.title": "Software Development Bootcamp",
     "home.education.bootcamp.institution": "MinTic - UIS Colombia",
     "home.education.bootcamp.period": "May 2021 – December 2021",
+
+    // Contact
+    "home.contact.title": "Contact",
+    "home.contact.name": "Name",
+    "home.contact.name_placeholder": "Your name",
+    "home.contact.email": "Email",
+    "home.contact.email_placeholder": "your.email@example.com",
+    "home.contact.message": "Message",
+    "home.contact.message_placeholder": "Your Message...",
+    "home.contact.send": "Send Message",
+    "home.contact.email_label": "Email",
+    "home.contact.location_label": "Location",
+    "home.contact.location": "Colombia",
   },
   es: {
     // Navbar
@@ -275,5 +288,18 @@ export const ui = {
     "home.education.bootcamp.title": "Bootcamp de Desarrollo de Software",
     "home.education.bootcamp.institution": "MinTic - UIS Colombia",
     "home.education.bootcamp.period": "Mayo 2021 – Diciembre 2021",
+
+    // Contact
+    "home.contact.title": "Contacto",
+    "home.contact.name": "Nombre",
+    "home.contact.name_placeholder": "Tu nombre",
+    "home.contact.email": "Correo Electrónico",
+    "home.contact.email_placeholder": "tu.correo@ejemplo.com",
+    "home.contact.message": "Mensaje",
+    "home.contact.message_placeholder": "Tu mensaje...",
+    "home.contact.send": "Enviar Mensaje",
+    "home.contact.email_label": "Correo Electrónico",
+    "home.contact.location_label": "Ubicación",
+    "home.contact.location": "Colombia",
   },
 } as const;

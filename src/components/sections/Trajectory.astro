@@ -1,12 +1,14 @@
 ---
-import ExperienceTimeline from "@/components/sections/ExperienceTimeline.astro";
 import Education from "@/components/sections/Education.astro";
+import ExperienceTimeline from "@/components/sections/ExperienceTimeline.astro";
 import Skills from "@/components/sections/Skills.astro";
 import Container from "@/components/shared/Container.astro";
 ---
 
 <Container tag="section">
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-14">
+  <div
+    class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-14 border-b border-ivory-500 pb-14"
+  >
     <div class="lg:col-span-7">
       <ExperienceTimeline />
     </div>

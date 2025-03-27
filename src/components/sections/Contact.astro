@@ -1,0 +1,123 @@
+---
+import ExternalLink from "@/components/icons/ExternalLink.astro";
+import Mail from "@/components/icons/Mail.astro";
+import MapPin from "@/components/icons/MapPin.astro";
+import Button from "@/components/shared/Button.astro";
+import Container from "@/components/shared/Container.astro";
+
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Container className="py-12">
+  <h2 id="contact" class="text-3xl font-grenze font-bold mb-6 tracking-tight">
+    {t("home.contact.title")}
+  </h2>
+
+  <div class="border border-ivory-500 p-4 bg-ivory-200 dark:bg-carbon-900">
+    <form class="space-y-4">
+      <div>
+        <label for="name" class="block mb-2 font-bricolage-grotesque">
+          {t("home.contact.name")}
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          class="bg-ivory-200 dark:bg-carbon-900 border border-ivory-500 p-2 w-full font-mono text-carbon-700 dark:text-ivory-100"
+          placeholder={t("home.contact.name_placeholder")}
+        />
+      </div>
+
+      <div>
+        <label for="email" class="block mb-2 font-bricolage-grotesque">
+          {t("home.contact.email")}
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="bg-ivory-200 dark:bg-carbon-900 border border-ivory-500 p-2 w-full font-mono text-carbon-700 dark:text-ivory-100"
+          placeholder={t("home.contact.email_placeholder")}
+        />
+      </div>
+
+      <div>
+        <label for="message" class="block mb-2 font-bricolage-grotesque">
+          {t("home.contact.message")}
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows={5}
+          class="bg-ivory-200 dark:bg-carbon-900 border border-ivory-500 p-2 w-full font-mono text-carbon-700 dark:text-ivory-100"
+          placeholder={t("home.contact.message_placeholder")}></textarea>
+      </div>
+
+      <Button
+        id="contact_send_button"
+        variant="primary"
+        type="submit"
+        className="w-full py-3 text-base! cursor-pointer"
+      >
+        {t("home.contact.send")}
+      </Button>
+    </form>
+  </div>
+
+  <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="border border-ivory-500 p-4 bg-ivory-200 dark:bg-carbon-900">
+      <h3 class="text-lg font-bricolage-grotesque mb-2 flex items-center">
+        <Mail
+          className="h-4 w-4 mr-2 stroke-carbon-900 dark:stroke-ivory-100"
+        />
+        {t("home.contact.email_label")}
+      </h3>
+      <a
+        href="mailto:contact@wrsbyte.com"
+        class="font-mono flex items-center stroke-carbon-900 dark:stroke-ivory-100 hover:text-ivory-700 hover:stroke-ivory-700 dark:hover:stroke-ivory-500 dark:hover:text-ivory-500 transition-colors"
+      >
+        me@wrsbyte.com
+        <ExternalLink className="h-3 w-3 ml-1" />
+      </a>
+    </div>
+
+    <div class="border border-ivory-500 p-4 bg-ivory-200 dark:bg-carbon-900">
+      <h3 class="text-lg font-bricolage-grotesque mb-2 flex items-center">
+        <MapPin
+          className="h-4 w-4 mr-2 stroke-carbon-900 dark:stroke-ivory-100"
+        />
+        {t("home.contact.location_label")}
+      </h3>
+      <p class="font-mono">{t("home.contact.location")}</p>
+    </div>
+  </div>
+</Container>
+
+<script>
+  import { actions } from "astro:actions";
+
+  const sendButton = document.getElementById("contact_send_button");
+  if (!sendButton) throw new Error("Element not found");
+
+  sendButton.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    const form = sendButton.closest("form");
+    if (!form) throw new Error("Form not found");
+
+    const formData = new FormData(form);
+    const { data, error } = await actions.sendEmail({
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      message: formData.get("message") as string,
+    });
+
+    console.log(data, error);
+  });
+</script>
