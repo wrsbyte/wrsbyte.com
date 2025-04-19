@@ -2,7 +2,12 @@ import { defaultLang, ui } from "./ui";
 
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split("/");
-  if (lang in ui) return lang as keyof typeof ui;
+
+  if (lang in ui) {
+    console.log({ lang: lang });
+    return lang as keyof typeof ui;
+  }
+
   return defaultLang;
 }
 
@@ -17,8 +22,6 @@ export function getLanguages() {
 }
 
 export function formatDate(date: string | Date, lang: string) {
-  const dateObj = (
-    date instanceof Date ? date : new Date(date)
-  )
+  const dateObj = date instanceof Date ? date : new Date(date);
   return new Intl.DateTimeFormat(lang).format(dateObj);
 }
