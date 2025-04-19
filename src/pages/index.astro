@@ -1,3 +1,20 @@
 ---
-Astro.redirect("/es")
+import RootLayout from "@/layouts/RootLayout.astro";
+
+import { getLanguages } from "@/i18n/utils";
+
+export async function getStaticPaths() {
+  const languages = getLanguages();
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const title = "wrsbyte | Portfolio";
+const description =
+  "Portfolio of wrsbyte, a software engineer with a passion for web development and open source.";
+
+Astro.redirect("/es");
 ---
+
+<RootLayout title={title} description={description}>
+  <main class="grid h-screen w-full justify-center items-center">...</main>
+</RootLayout>
