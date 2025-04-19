@@ -1,20 +1,26 @@
 ---
+import Contact from "@/components/sections/Contact.astro";
+import GameOfLife from "@/components/sections/GameOfLife.astro";
+import Presentation from "@/components/sections/Presentation.astro";
+import Trajectory from "@/components/sections/Trajectory.astro";
+import AvailableToWorkBadge from "@/components/shared/AvailableToWorkBadge.astro";
+import Footer from "@/components/shared/Footer.astro";
+import Header from "@/components/shared/Header.astro";
 import RootLayout from "@/layouts/RootLayout.astro";
-
-import { getLanguages } from "@/i18n/utils";
-
-export async function getStaticPaths() {
-  const languages = getLanguages();
-  return languages.map((lang) => ({ params: { lang } }));
-}
 
 const title = "wrsbyte | Portfolio";
 const description =
   "Portfolio of wrsbyte, a software engineer with a passion for web development and open source.";
-
-Astro.redirect("/es");
 ---
 
 <RootLayout title={title} description={description}>
-  <main class="grid h-screen w-full justify-center items-center">...</main>
+  <Header />
+  <main class="flex-1">
+    <AvailableToWorkBadge />
+    <GameOfLife />
+    <Presentation />
+    <Trajectory />
+    <Contact />
+  </main>
+  <Footer />
 </RootLayout>
