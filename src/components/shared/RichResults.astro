@@ -1,90 +1,120 @@
 ---
-/** https://developers.google.com/search/docs/appearance/structured-data/organization */
-const organizationSchema = {
+const personSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  url: "https://www.infolavelada.com",  
-  image: "https://cdn.lavelada.dev/og.jpg",
+  "@type": "Person",
+  name: "Wilmer Rodríguez Sánchez",
+  url: "https://www.tudominio.com",
+  image: "https://cdn.tudominio.com/profile.jpg",
+  jobTitle: "Software Engineer",
+  description:
+    "Software Engineer specializing in full-stack development and data science. Building scalable solutions and sharing knowledge through technical blog posts.",
   sameAs: [
-    "https://www.instagram.com/infolavelada",
-    "https://x.com/infoLaVelada",
-    "https://github.com/midudev/la-velada-web-oficial",
+    "https://github.com/wrsbyte",
+    "https://www.linkedin.com/in/wrsbyte",
+    "https://x.com/wrsbyte",
   ],
-  logo: "https://cdn.lavelada.dev/og.jpg",
-  name: "La Velada del Año 4",
-  alternateName: "La Velada del Año IV",
-  description:
-    "Web Oficial de La Velada del Año IV, evento de boxeo entre streamers y creadores de contenido, organizado por Ibai Llanos",
+  knowsAbout: [
+    "Software Development",
+    "Machine Learning",
+    "Web Development",
+    "JavaScript",
+    "TypeScript",
+    "Python",
+    "Node.js",
+    "Angular",
+    "Django",
+    "REST APIs",
+    "Data Science",
+  ],
+  alumniOf: {
+    "@type": "EducationalOrganization",
+    name: "Universidad de Pamplona",
+  },
+  worksFor: {
+    "@type": "Organization",
+    name: "SHF S.A.S.",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "Colombia",
+  },
 };
 
-/** https://developers.google.com/search/docs/appearance/structured-data/event */
-const eventSchema = {
+const websiteSchema = {
   "@context": "https://schema.org",
-  "@type": "Event",
-  name: "La Velada del Año 4",
-  startDate: "2024-07-13T19:00:00",
-  endDate: "2024-07-13T22:00:00",
-  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode", // https://schema.org/EventAttendanceModeEnumeration
-  eventStatus: "https://schema.org/EventScheduled", // https://schema.org/EventStatusType
-  location: {
-    "@type": "Place",
-    name: "Estadio Santiago Bernabéu",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Av. de Concha Espina, 1",
-      addressLocality: "Chamartín",
-      postalCode: "28036",
-      addressRegion: "Madrid",
-      addressCountry: "ES",
-    },
-  },
-  image: ["https://cdn.lavelada.dev/og.jpg"],
+  "@type": "WebSite",
+  name: "Wilmer Rodríguez Sánchez - Portfolio",
+  url: "https://www.tudominio.com",
   description:
-    "La Velada del Año es un evento de boxeo aficionado entre streamers, creadores de contenido y celebridades, organizado por Ibai Llanos.",
-  organizer: {
+    "Portfolio and technical blog of Wilmer Rodríguez Sánchez, Software Engineer specializing in full-stack development and data science.",
+  author: {
     "@type": "Person",
-    name: "Ibai Llanos",
-    url: "https://www.twitch.tv/ibai",
+    name: "Wilmer Rodríguez Sánchez",
+  },
+  inLanguage: {
+    "@type": "Language",
+    name: "Spanish",
+    alternateName: "es",
   },
 };
 
-const FAQs = [
-  {
-    question: "¿Quién va a participar en La Velada del Año 4?",
-    answer: `Los participantes de esta edición serán`,
+const blogPostingSchema = (post: any) => ({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": post.url,
   },
-  {
-    question: "¿Cuándo tendrá lugar La Velada del Año 4?",
-    answer:
-      "La Velada del Año 4 tendrá lugar el <strong>sábado 13 de julio de 2024</strong> en el Estadio Santiago Bernabéu",
+  headline: post.title,
+  description: post.excerpt,
+  datePublished: post.publishedDate,
+  dateModified: post.updatedDate,
+  author: {
+    "@type": "Person",
+    name: "Wilmer Rodríguez Sánchez",
   },
-  {
-    question: "¿Dónde tendrá lugar La Velada del Año 4?",
-    answer:
-      "La Velada del Año 4 tendrá lugar el sábado 13 de julio de 2024 en el <strong>Estadio Santiago Bernabéu</strong>",
-  },
-];
+  image: post.featuredImage,
+  articleBody: post.content,
+  keywords: post.tags.join(", "),
+  inLanguage: "es",
+});
 
-/** https://developers.google.com/search/docs/appearance/structured-data/faqpage */
 const FAQSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
-    FAQs.map(({ answer, question }) => ({
+    {
       "@type": "Question",
-      name: question,
+      name: "¿Qué tecnologías utilizas?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: answer,
+        text: "Tengo experiencia en múltiples tecnologías incluyendo JavaScript/TypeScript, Python, Node.js, Angular, Django, REST APIs, y sistemas de machine learning.",
       },
-    })),
+    },
+    {
+      "@type": "Question",
+      name: "¿Estás disponible para nuevos proyectos?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Actualmente estoy disponible para oportunidades de trabajo remoto, contratación directa y proyectos freelance.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cómo puedo contactarte?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Puedes usar el formulario de contacto en esta página o contactarme directamente a través de LinkedIn o GitHub.",
+      },
+    },
   ],
 };
 ---
 
-<script
-  type="application/ld+json"
-  set:html={JSON.stringify(organizationSchema)}
-/>
-<script type="application/ld+json" set:html={JSON.stringify(eventSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(FAQSchema)} />
+
+<!-- {#each posts as post}
+  <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema(post))} />
+{/each} -->
