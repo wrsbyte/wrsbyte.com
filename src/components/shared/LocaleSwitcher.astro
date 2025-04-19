@@ -24,8 +24,11 @@ const getTranslatePath = (language: "en" | "es") => {
     return `/${language}/blog/${slug}`;
   }
 
-  url.pathname = url.pathname.replace(`/${lang}/`, `/${language}/`);
-  return url.pathname;
+  if (url.pathname.includes(`/${lang}/`)) {
+    return url.pathname.replace(`/${lang}/`, `/${language}/`);
+  }
+
+  return `/${language}${url.pathname}`;
 };
 
 const langs = {
