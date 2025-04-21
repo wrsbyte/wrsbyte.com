@@ -4,7 +4,6 @@ export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split("/");
 
   if (lang in ui) {
-    console.log({ lang: lang });
     return lang as keyof typeof ui;
   }
 

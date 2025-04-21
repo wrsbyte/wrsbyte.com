@@ -14,9 +14,18 @@ const getTranslatePath = (language: "en" | "es") => {
   const isDetailPost = url.pathname.match(/\/blog\/[\w-]+/);
 
   if (isDetailPost) {
-    const post = posts.find((post) => !!post.data.translations[language]);
+    const currentSlug = url.pathname.match(/\/blog\/([\w-]+)/)?.[1];
+    if (!currentSlug) {
+      return `/${language}/blog/`;
+    }
+
+    const post = posts.find(
+      (post) =>
+        !!post.data.translations[language] &&
+        post.data.translations[lang]?.includes(currentSlug)
+    );
     const slug = post?.data.translations[language]?.split("/").pop();
-    
+
     if (!slug) {
       return `/${language}/blog/`;
     }
@@ -37,7 +46,7 @@ const langs = {
 };
 ---
 
-<div  {...Astro.props} class="relative flex items-center gap-1">
+<div {...Astro.props} class="relative flex items-center gap-1">
   <Button
     id="localSwitcher"
     data-dropdown-toggle="dropdown"
