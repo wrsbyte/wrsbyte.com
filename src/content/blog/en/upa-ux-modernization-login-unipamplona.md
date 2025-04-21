@@ -64,21 +64,20 @@ On one hand, I loaded a background script responsible for listening to the exten
 
 ```javascript
 /**
- * El script de fondo sirve como oyente de eventos en segundo plano.
- * Permite configurar las páginas a las cuales tiene acceso la extensión.
+ * The background script acts as a listener for background events.
+ * It allows configuring which pages the extension can access.
  */
 chrome.runtime.onInstalled.addListener(function () {
-    // Elige cuando se debe activar la extension
-     chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
+    // Choose when the extension should be activated
+    chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
         chrome.declarativeContent.onPageChanged.addRules([{
             conditions: [new chrome.declarativeContent.PageStateMatcher({
                 pageUrl: { hostEquals: 'hermesoft.unipamplona.edu.co' },
             })],
             actions: [new chrome.declarativeContent.ShowPageAction()]
         }]);
-     }); 
-
-}); 
+    });
+});
 ```
 
 And on the other hand, I implemented a content script that was injected into the Vortal page to interact with the DOM. This [Content Script](https://developer.chrome.com/docs/extensions/reference/manifest/content-scripts?hl=es-419) was responsible for analyzing the DOM to extract the letter‑to‑number mapping, translate the password provided by the user from the popup, and finally simulate the necessary click events on the original virtual numeric keyboard elements to populate the password field.
@@ -87,8 +86,8 @@ And on the other hand, I implemented a content script that was injected into the
 
 ```javascript
 /**
- * Determina las claves y valores correspondientes a cada letra de la tabla.
- * @returns {*} dicc: Diccionario con las claves y valores.
+ * Determines the keys and corresponding values for each letter in the table.
+ * @returns {*} dicc: Dictionary with keys and values.
  */
 function search() {
     const itemsCount = 37;
