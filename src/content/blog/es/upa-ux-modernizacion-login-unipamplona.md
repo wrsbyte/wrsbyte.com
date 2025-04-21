@@ -33,7 +33,7 @@ El entorno académico de la [Universidad de Pamplona](https://www.unipamplona.ed
 
 Este sistema implementa un teclado virtual con 37 celdas donde las letras se mapean a números aleatorios en cada sesión. El usuario debe ingresar su contraseña con el teclado virtual reemplazando cada letra por su número correspondiente.
 
-![Vortal original de Unipamplona](/images/blog/unipamplona-vortal-original.png)
+![Vortal original de Unipamplona](/images/blog/unipamplona-vortal-original.webp)
 
 Aun cuando este mecanismo ofrece protección contra [keyloggers](https://wikipedia.org/wiki/Keylogger) de bajo nivel, genera una **experiencia de usuario deficiente** y dificulta la adopción de gestores de contraseñas modernos.
 
@@ -105,6 +105,8 @@ function search() {
 ```
 
 Los resultados de esta fase demostraron la factibilidad técnica de la automatización, eliminando la necesidad de la interacción manual del usuario con el teclado numérico. Sin embargo, esta aproximación presentó limitaciones significativas. La principal fue su fragilidad, ya que dependía estrictamente de la estructura específica del DOM del Vortal; cualquier cambio en las clases CSS o la disposición de los elementos HTML del teclado virtual podría inutilizar la extensión.
+
+![V1 UPA UX](/images/blog/unipamplona-vortal-extension-v1.webp)
 
 Además, la experiencia de usuario seguía siendo parcial, pues al mantener la entrada de contraseña en un popup desacoplado, no se resolvía la incompatibilidad con los gestores de contraseñas que requieren campos de entrada estándar directamente en la página. Finalmente, la interfaz del popup era rudimentaria y no ofrecía una experiencia integrada. El código fuente de esta versión se encuentra [disponible en GitHub](https://github.com/wrsbyte/Extension-Login-Unipamplona).
 
@@ -208,13 +210,13 @@ Desde la perspectiva de la seguridad, es fundamental destacar que **todo el proc
 
 Como funcionalidad adicional, implementé también un acceso directo al Vortal desde la página principal de la universidad, inyectado mediante un Content Script similar.
 
-![Resultado final UPA UX](/images/blog/unipamplona-vortal-extension-v2.png)
+![Resultado final UPA UX](/images/blog/unipamplona-vortal-extension-v2.webp)
 
 ### Despliegue en producción
 
 La versión 2 la publiqué en la **Chrome Web Store** bajo el nombre _UPA UX_, disponible [aquí](https://chromewebstore.google.com/detail/upa-ux/cbkhjckelimkbkmofdjjoekoimhgkkne). Siéntase libre de instalarla y probarla. La extensión está diseñada para funcionar exclusivamente en el dominio del Vortal de la Universidad de Pamplona, garantizando que no interfiera con otros sitios web.
 
-![Resultado final UPA UX en Store](/images/blog/unipamplona-vortal-extension-store.png)
+![Resultado final UPA UX en Store](/images/blog/unipamplona-vortal-extension-store.webp)
 
 La implementación final consiguió una mejora sustancial de la experiencia de usuario, reemplazando una interfaz obsoleta por una moderna, intuitiva y alineada con los estándares web actuales.
 
