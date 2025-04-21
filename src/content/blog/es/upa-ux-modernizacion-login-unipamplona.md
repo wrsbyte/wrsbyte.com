@@ -27,7 +27,7 @@ A lo largo del blog encontrará enlaces a recursos externos ([MDN Web Docs](http
 
 ## Problemática
 
-El entorno académico de la Universidad de Pamplona depende de un portal antiguo (Hermesoft/Academusoft) construido con JavaServer Pages (JSP), de renderizado de multi página con la etiqueta [`<frame>`](https://developer.mozilla.org/en/docs/Web/HTML/Reference/Elements/frame) y [`<frameset>`](https://developer.mozilla.org/en/docs/Web/HTML/Reference/Elements/frameset) y que cuenta con una experiencia de usuario (UX) que deja mucho que desear.
+El entorno académico de la [Universidad de Pamplona](https://www.unipamplona.edu.co/) depende de un portal antiguo (Hermesoft/Academusoft) construido con JavaServer Pages (JSP), de renderizado de multi página con la etiqueta [`<frame>`](https://developer.mozilla.org/en/docs/Web/HTML/Reference/Elements/frame) y [`<frameset>`](https://developer.mozilla.org/en/docs/Web/HTML/Reference/Elements/frameset) y que cuenta con una experiencia de usuario (UX) que deja mucho que desear.
 
 > **Nota**: Los frame y frameset's eran útiles para segregar el contenido de una página web en diferentes secciones, pero hoy en día son considerados obsoletos y no recomendados para su uso. [Ver la siguiente discusión](https://stackoverflow.com/questions/25554594/do-web-developers-still-use-framesets).
 
