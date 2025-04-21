@@ -214,7 +214,7 @@ Como funcionalidad adicional, implementé también un acceso directo al Vortal d
 
 ### Despliegue en producción
 
-La versión 2 la publiqué en la **Chrome Web Store** bajo el nombre _UPA UX_, disponible [aquí](https://chromewebstore.google.com/detail/upa-ux/cbkhjckelimkbkmofdjjoekoimhgkkne). Siéntase libre de instalarla y probarla. La extensión está diseñada para funcionar exclusivamente en el dominio del Vortal de la Universidad de Pamplona, garantizando que no interfiera con otros sitios web.
+La versión 2 la publiqué en la **Chrome Web Store** bajo el nombre _UPA UX_, [disponible aquí](https://chromewebstore.google.com/detail/upa-ux/cbkhjckelimkbkmofdjjoekoimhgkkne). Siéntase libre de instalarla y probarla. La extensión está diseñada para funcionar exclusivamente en el dominio del Vortal de la Universidad de Pamplona, garantizando que no interfiera con otros sitios web.
 
 ![Resultado final UPA UX en Store](/images/blog/unipamplona-vortal-extension-store.webp)
 

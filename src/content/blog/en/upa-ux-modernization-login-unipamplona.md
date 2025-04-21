@@ -213,7 +213,7 @@ As an additional feature, I also implemented a shortcut to the Vortal from the u
 
 ### Production Deployment
 
-I published version 2 in the **Chrome Web Store** under the name _UPA UX_, available [here](https://chromewebstore.google.com/detail/upa-ux/cbkhjckelimkbkmofdjjoekoimhgkkne). Feel free to install and try it. The extension is designed to work exclusively on the University of Pamplona Vortal domain, ensuring that it does not interfere with other websites.
+I published version 2 in the **Chrome Web Store** under the name _UPA UX_, [available here](https://chromewebstore.google.com/detail/upa-ux/cbkhjckelimkbkmofdjjoekoimhgkkne). Feel free to install and try it. The extension is designed to work exclusively on the University of Pamplona Vortal domain, ensuring that it does not interfere with other websites.
 
 ![UPA UX final result in the Store](/images/blog/unipamplona-vortal-extension-store.webp)
 
