@@ -21,8 +21,8 @@ const page = Astro.props;
 
 const { Content } = await page.render();
 
-const title = page.data.title;
-const description = "blog";
+const title = `${page.data.title} - wrsbyte`;
+const description = `${page.data.title} A blog about web development, programming, and technology.`;
 ---
 
 <RootLayout title={title} description={description}>
