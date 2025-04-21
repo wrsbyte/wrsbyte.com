@@ -1,6 +1,6 @@
 ---
 title: "UPA UX: Modernization of the Login in the Unipamplona Vortal"
-date: 2023-04-20
+date: 2025-04-20
 views: 1245
 translations:
   en: upa-ux-modernization-login-unipamplona
