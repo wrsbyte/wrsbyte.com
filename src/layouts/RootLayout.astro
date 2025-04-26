@@ -1,8 +1,9 @@
 ---
 import SEO from "@/components/shared/SEO.astro";
-import  SpeedInsights  from "@vercel/speed-insights/astro"
 import { getLangFromUrl } from "@/i18n/utils";
 import type { Preload } from "@/types/Preload";
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 import "@/styles/global.css";
 import "@fontsource-variable/jetbrains-mono";
@@ -37,6 +38,7 @@ const { title, description, preload, canonical, image } = Astro.props;
     class="antialiased bg-ivory-200 dark:bg-carbon-900 text-carbon-700 dark:text-ivory-100 selection:bg-ivory-700 dark:selection:bg-carbon-700 flex flex-col min-h-screen"
   >
     <SpeedInsights />
+    <Analytics />
     <slot />
   </body>
 </html>
